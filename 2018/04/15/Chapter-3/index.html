@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Chapter 3 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter 3">
+<meta property="og:url" content="http://yoursite.com/2018/04/15/Chapter-3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-15T10:57:30.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3">
+<meta name="twitter:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Chapter-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/15/Chapter-3/" class="article-date">
+  <time datetime="2018-04-15T10:02:36.000Z" itemprop="datePublished">2018-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chapter 3
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Chapter-3-Linear-Regression"><a href="#Chapter-3-Linear-Regression" class="headerlink" title="Chapter 3  Linear Regression"></a>Chapter 3  Linear Regression</h2><p>几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）</p>
+<ul>
+<li><p>输入和输出之间是否存在关系</p>
+</li>
+<li><p>两者的联系是否紧密</p>
+</li>
+<li><p>是否有多个输入对输出构成贡献</p>
+</li>
+<li><p>如何准确地评估这种影响</p>
+</li>
+<li><p>如何准确的进行预测</p>
+</li>
+<li><p>这种关系是否是线性</p>
+</li>
+<li><p>是否存在协同效应</p>
+<p>​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示：</p>
+<p><script type="math/tex">Y≈β_0+β_1X</script>                (3.1)</p>
+<p>​    其中$\approx$符号表示近似地表示为。在3.1中，$\beta_0$和$\beta_1$为两个未知的常数项，分别表示为截距和斜率。在统计学习中，我们通常要估计这两个系数，以实现良好的预测效果。令$\hat y_i = \hat \beta_0 + \hat \beta_1X$，</p>
+<p>为基于$X$中第$i$个数据的对$Y$的测试结果，$e_i = y_i - \hat y_i$代表第$i$ 个残余量，也就是估计值与实际值的差值。因此，我们定义如式3.2的最小残余方差(RSS):</p>
+<p><script type="math/tex">RSS=e_1^2+e_2^2+...+e_n^2</script>                                                    (3.2a)</p>
+<p><script type="math/tex">RSS = (y_1 - \hat \beta_0 - \hat \beta_1x_1)^2 + (y_2 - \hat \beta_0 - \hat \beta_1x_2)^2 + ... + (y_n - \hat \beta_0 - \hat \beta_1x_n)^2</script>        (3.2b)</p>
+<p>​    运用微分公式，求得当RSS最小时的$\hat \beta_0$与$\hat \beta_1$值为式3.3的结果：</p>
+<p><script type="math/tex">\beta_1 = \frac {\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sum_{i =1}^{n}(x_i - \overline x)}</script>                (3.3a)</p>
+<p><script type="math/tex">\hat \beta_0 = \overline y - \hat \beta_1 \overline x</script>                    (3.3b)</p>
+<p>​    式3.4定义了最小平方的参数估计。</p>
+<h3 id="评估参数估计的准确性"><a href="#评估参数估计的准确性" class="headerlink" title="评估参数估计的准确性"></a>评估参数估计的准确性</h3><p>​    根据第二章的结果，$Y=f(X)+ϵ$，如果$f$用线性函数进行估计的话，可以得到式3.4：</p>
+<p><script type="math/tex">Y=β_0+β_1X+ϵ</script>            (3.4)</p>
+<p>​    其中$\beta_0$是截距项，$\beta_1$是斜率项，$\epsilon$是误差项。式3.4是population regression line。最小平方曲线可以通过式3.4进行计算。从基础上来说，两条曲线的区别是对大数据量标准统计方法的扩展。在一般的模型中，数据样本的均值$\mu$是未知的，一种可行的估计方法是$\mu = \overline y$，其中$\overline y$ 是抽到的样本的均值。</p>
+<p>​     如果使用样本均值$\hat \mu$对$\mu$的估计是unbiased。那么评估这种估计的效果可以用$SE(\hat \mu)$描述，即为$\hat \mu$的标准误差。具体的方差公式可以用式3.5确定：</p>
+<p><script type="math/tex">Var(\hat \mu) = SE(\mu)^2 = \frac{\sigma^2} {n}</script>            (3.5)</p>
+<p>​    这其中$\sigma$是输出量$Y$中一系列$y_i$的标准差。在之前的线性估计中，可以使用式3.6来估计$\beta_0$</p>
+<p>和$\beta_1$的标准误差(SE)。</p>
+<p><script type="math/tex">SE(\hat \beta_0)^2 = \sigma^2[\frac 1n + \frac{\overline x^2}{\sum_{i = 1} ^ {n}(x_i - \overline x)}], SE(\hat \beta_1)^2 = \frac{\sigma^2}{\sum_{i = 1}^{n}(x_i - \overline x)}</script>        (3.6)</p>
+<p>​    其中$\sigma^2 = Var(\epsilon)$。为了确保这些公式的有效性，需要假设对每个观测点的误差$\epsilon_i$与公共的误差 $\sigma^2$不相关。值得注意的几点是，$SE(\hat \beta_1)$的值将会更小，如果$x_i$的分布更为分散，如果$\overline x$为0的话，$SE(\hat \beta_0)$将与$SE(\hat \mu)$的值相等。总体来说，$\sigma^2$是未知的。估计的$\sigma$被认作残余标准误差，RSE可以通过这个公式计算：$RSE=\sqrt {RSS/(n−2)}$。标准误差可以用置信区间来计算。对于线性回归来说，$\beta_1$的95%置信区间的格式如下，式3.7：</p>
+<p><script type="math/tex">\hat \beta_1 \pm 2*SE(\hat \beta_1)</script>                    (3.7)</p>
+<p>​    在这个区间之内有95%的概率。在假设检验中，$\beta_1$是描述$X$和$Y$的关系强弱的大小的量。在实际情况中，我们计算<strong>t-统计量</strong>,式3.8:</p>
+<p><script type="math/tex">t = \frac {\hat \beta_1 - 0}{SE(\hat \beta_1)}</script>                        (3.8)</p>
+<p>​    在上式中，如果$X$和$Y$之间没有相关性的话，那么t-分布的自由度就是$n - 2$。另外，在$β_1=0$的情况下，统计量的绝对值大于等于$|t|$时的概率即为p值。一个很小的p值表示预测子和响应之间的一种很强烈的联系。</p>
+<p>​    大概来说，回归的实际响应曲线根据以下公式3.9进行计算：</p>
+<p><script type="math/tex">RSE = \sqrt{\frac{1}{n - 2}RSS} = \sqrt {\frac {1}{n - 2} \sum_{i = 1}^{n}(y_i - \hat y_i)^2}</script>            (3.9)</p>
+<p>​    而在前面的定义中，RSS的计算结果为（式3.10）：</p>
+<p><script type="math/tex">RSS = \sum_{i = 1}^{n}(y_i - \hat y_i)^2</script>                        (3.10)</p>
+<p>​    RSE被认为对模型3.5的拟合的缺少的情况。如果通过模型的预测结果与实际结果比较相近，也就是$\hat y_i \approx y_i$，其中$i=1,…,n$。</p>
+<p>​    虽然RSE可以用来衡量对模型的拟合程度，因为总是衡量$Y$的单元，但是我们并不清楚事什么导致了比较好的RSE的结果。而$R^2$统计量提供了一种方法，主要是一种比例的形式——也就是之前解释的variance——是一种对$Y$的独立程度的体现。</p>
+<p>​    为了计算$R^2$统计量，使用公式3.11：</p>
+<p><script type="math/tex">R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}</script>                (3.11)</p>
+<p>​    其中$TSS = \sum(y_i - \overline y)^2​$，是对$y​$与$\overline y​$的差的平方和。TSS用来评估响应$Y​$的总的variance，也可以被认为可变的固有量的平方。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg0p56ea000144ua9z0zire5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/15/Chapter-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Chapter 2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/15/Chapter-3/">Chapter 3</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/15/Chapter-2/">Chapter 2</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/15/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
