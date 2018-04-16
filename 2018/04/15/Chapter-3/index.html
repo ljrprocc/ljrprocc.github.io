@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-16T05:52:07.536Z">
+<meta property="og:updated_time" content="2018-04-16T06:06:18.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3">
 <meta name="twitter:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
@@ -150,18 +150,17 @@
 </ol>
 <p>​    接下来进行具体的分析：</p>
 <p>​<strong>1. 是否在响应值以及预测值之间存在关系？</strong></p>
-<p>​    上述问题等价于下述假设$H_0$：</p>
-<p>​</p>
+<p>​    上述问题等价于下述假设$H_0$：$\beta_1 = \beta_2 = … = \beta_p = 0$</p>
 <p>​    而上述假设则可以用<strong>F-统计量</strong>进行计算：</p>
 <p><script type="math/tex">F = \frac {(TSS - RSS) / p}{RSS /(n - p - 1)}</script>            (3.16)</p>
-<p>​    其中，TSS与RSS和简单线性回归时的定义相同。如果线性模型的假设是准确的话，那么</p>
+<p>​    其中，TSS与RSS和简单线性回归时的定义相同。如果线性模型的假设是准确的话，那么$E(RSS/(n - p - 1)) = \sigma^2$ ，假设$H_0$是正确的，那么$E((TSS - RSS) / p = \sigma^2)$。因此，当响应子与预测子之间没有实际的联系只是，可以期待F-统计量的值接近于1.另一方面，如果$H_0$不正确，那么$E((TSS - RSS) / p) &gt; \sigma^2$，因此可以期待F-统计量大于1。</p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1tpmgw0000jgua9kuaw4ms" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1u6cab0000zoua20qpg03k" class="article-share-link">Share</a>
       
       
     </footer>
