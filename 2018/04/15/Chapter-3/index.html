@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-16T06:06:18.354Z">
+<meta property="og:updated_time" content="2018-04-16T07:14:11.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3">
 <meta name="twitter:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
@@ -154,13 +154,19 @@
 <p>​    而上述假设则可以用<strong>F-统计量</strong>进行计算：</p>
 <p><script type="math/tex">F = \frac {(TSS - RSS) / p}{RSS /(n - p - 1)}</script>            (3.16)</p>
 <p>​    其中，TSS与RSS和简单线性回归时的定义相同。如果线性模型的假设是准确的话，那么$E(RSS/(n - p - 1)) = \sigma^2$ ，假设$H_0$是正确的，那么$E((TSS - RSS) / p = \sigma^2)$。因此，当响应子与预测子之间没有实际的联系只是，可以期待F-统计量的值接近于1.另一方面，如果$H_0$不正确，那么$E((TSS - RSS) / p) &gt; \sigma^2$，因此可以期待F-统计量大于1。</p>
+<p>​    值得注意的是，这里$RSS / (n - p - 1)$表示自由度为$n - p - 1$的有影响的预测序列$X_{p + 1},  X_{p + 2}, …, X_n$的方差除以自由度，而$(TSS - RSS) / p$表示通过预测得到的回归方差除以自由度，是预测模型的准确性。是F-分布的定义。当$n$越大，可以接受的拒绝限越低。</p>
+<p>​    在式3.16中，使用了所有的前$p$项均为0，而有时我们只需要其中的$q$个子项为0即可，也就是$H_0:$$\beta_{p - q + 1} = \beta_{p - q + 2} = … = \beta_p = 0$，假设残余方差和为$RSS_0$，此时的F-统计量为：</p>
+<p><script type="math/tex">F = \frac{(RSS_0 - RSS) / q}{RSS / (n - p - 1)}</script>        (3.17)</p>
+<p>​    这个逻辑对预测子$p$很大的时候有一些缺陷。当$p &gt; n$时，系数$\beta_j$比观测点总数要多， F-统计量就不适用了。</p>
+<p><strong>2.决定重要的子变量</strong></p>
+<p>​    </p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1u6cab0000zoua20qpg03k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1wlnvm00012suaef26lnh3" class="article-share-link">Share</a>
       
       
     </footer>
