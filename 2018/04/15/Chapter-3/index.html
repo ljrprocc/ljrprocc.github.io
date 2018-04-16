@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-16T03:18:39.670Z">
+<meta property="og:updated_time" content="2018-04-16T03:23:29.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3">
 <meta name="twitter:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
@@ -137,18 +137,18 @@
 <p>​    而这个相关系数也可以用来评估$X$和$Y$的线性相关关系。可以看到，在单变量线性回归中，$R^2 = r^2 = cor(X, Y)$， 但是对多变量模型来说就不同了。</p>
 <h3 id="多变量线性拟合"><a href="#多变量线性拟合" class="headerlink" title="多变量线性拟合"></a>多变量线性拟合</h3><p>​    多变量拟合公式：</p>
 <p><script type="math/tex">Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 +...+ \beta_p X_p + \epsilon</script>            (3.13)</p>
+<p>​    类似地，也可以对各个参数进行估计：</p>
+<p><script type="math/tex">\hat y = \hat \beta_0 + \hat \beta_1 x_1 + \hat \beta_2 x_2 +... + \hat \beta_px_p</script>                (3.14)</p>
+<p>​    RSS定义如下：</p>
+<p><script type="math/tex">RSS = \sum_{i =1}^{n}(y_i - \hat y_i)^2 = \sum_{i = 1}^{n}(y_i - \hat \beta_0 - \hat \beta_1 x_{i1} - ... -\hat \beta_p x_{ip})</script>        (3.15)</p>
+<p>​    在多变量的线性拟合中，我们需要集中精力解决下列问题：</p>
 </li>
 </ul>
-<p>​            类似地，也可以对各个参数进行估计：</p>
-<p>​    <script type="math/tex">\hat y = \hat \beta_0 + \hat \beta_1 x_1 + \hat \beta_2 x_2 +... + \hat \beta_px_p</script>                (3.14)</p>
-<p>​        RSS定义如下：</p>
-<p>​    <script type="math/tex">RSS = \sum_{i =1}^{n}(y_i - \hat y_i)^2 = \sum_{i = 1}^{n}(y_i - \hat \beta_0 - \hat \beta_1 x_{i1} - ... -\hat \beta_p x_{ip})</script>        (3.15)</p>
-<p>​        在多变量的线性拟合中，我们需要集中精力解决下列问题：</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1o8xhp0000z8uat1qflrj4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1od38g00004ouayqwirc0f" class="article-share-link">Share</a>
       
       
     </footer>
