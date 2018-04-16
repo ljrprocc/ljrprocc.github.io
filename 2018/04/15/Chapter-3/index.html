@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-16T08:39:11.686Z">
+<meta property="og:updated_time" content="2018-04-16T13:26:47.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3">
 <meta name="twitter:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
@@ -169,14 +169,20 @@
 <p>​    可以看到随着$p$的增大，RSS的值会减小，但是总体的RSE的值会增大。另外，也可参考书中图3.5以建立一个可视化的印象。在模型拟合中，如果不同预测子之间不独立的话，就难以得到一个较好的线性拟合结果。</p>
 <p><strong>4.预测</strong></p>
 <p>​    在线性拟合的预测中，主要存在3方面的问题：</p>
-<p>（1）系数估计结果$\hat Y = \hat \beta_0 + \hat \beta_1X_1 + … + \hat \beta_pX_p$ , 只是一个真实回归模型$f(X) = \beta_0 + \beta_1X_1 + … + \beta_pX_p$的一个估计，是第二章提到的不可减少的误差。</p>
+<p>（1）系数估计结果$\hat Y = \hat \beta_0 + \hat \beta_1X_1 + … + \hat \beta_pX_p$ , 只是一个真实回归模型$f(X) = \beta_0 + \beta_1X_1 + … + \beta_pX_p$的一个估计，是第二章提到的不可减少的误差。因此我们可以通过计算一个置信区间以表示$\hat Y$对$f(X)$的接近程度。</p>
+<p>（2）当然，也存在model bias的误差情况，即为与实际的误差。用以估计实际的最佳情况。</p>
+<p>（3）如果知道实际的$f(X)$的值，也就是知道$\beta_0, \beta_1, …, \beta_p$的值，响应模型也不能进行准确的预测，因为不可减少的随机误差$\epsilon$。那么$Y$与$\hat Y$到底相差多少呢？这里使用一种预测区间来进行评估。预测区间通常比置信区间要打，因为它结合了对$f(X)$估计的误差（可减小的误差）以及对未知数据的误差（不可减小的误差）。</p>
+<h3 id="关于回归模型的一些注意事项"><a href="#关于回归模型的一些注意事项" class="headerlink" title="关于回归模型的一些注意事项"></a>关于回归模型的一些注意事项</h3><p><strong>1. 定量的预测子</strong></p>
+<p>​    具有有限种情况的预测子，是离散的。比如，定义如下的预测子：</p>
+<p><script type="math/tex">x_i = \begin{cases}1,  & \text{if $i$th person is female} \\\\ 0, & \text{if $i$th person is male} \end{cases}</script>                (3.26)</p>
+<p>​    </p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1zmyow0001x8ua6zgd8bae" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg29wy090001zguaxnsxusmk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -274,22 +280,6 @@
 
 
 
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!--script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
