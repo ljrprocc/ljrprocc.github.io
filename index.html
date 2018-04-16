@@ -103,53 +103,117 @@
 </li>
 <li><p>是否存在协同效应</p>
 <p>​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示：</p>
-<p><script type="math/tex">Y≈β_0+β_1X</script>                (3.1)</p>
-<p>​    其中$\approx$符号表示近似地表示为。在3.1中，$\beta_0$和$\beta_1$为两个未知的常数项，分别表示为截距和斜率。在统计学习中，我们通常要估计这两个系数，以实现良好的预测效果。令$\hat y_i = \hat \beta_0 + \hat \beta_1X$，</p>
-<p>为基于$X$中第$i$个数据的对$Y$的测试结果，$e_i = y_i - \hat y_i$代表第$i$ 个残余量，也就是估计值与实际值的差值。因此，我们定义如式3.2的最小残余方差(RSS):</p>
-<p><script type="math/tex">RSS=e_1^2+e_2^2+...+e_n^2</script>                                                    (3.2a)</p>
-<p><script type="math/tex">RSS = (y_1 - \hat \beta_0 - \hat \beta_1x_1)^2 + (y_2 - \hat \beta_0 - \hat \beta_1x_2)^2 + ... + (y_n - \hat \beta_0 - \hat \beta_1x_n)^2</script>        (3.2b)</p>
-<p>​    运用微分公式，求得当RSS最小时的$\hat \beta_0$与$\hat \beta_1$值为式3.3的结果：</p>
-<p><script type="math/tex">\beta_1 = \frac {\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sum_{i =1}^{n}(x_i - \overline x)}</script>                (3.3a)</p>
-<p><script type="math/tex">\hat \beta_0 = \overline y - \hat \beta_1 \overline x</script>                    (3.3b)</p>
-<p>​    式3.4定义了最小平方的参数估计。</p>
-<h3 id="评估参数估计的准确性"><a href="#评估参数估计的准确性" class="headerlink" title="评估参数估计的准确性"></a>评估参数估计的准确性</h3><p>​    根据第二章的结果，$Y=f(X)+ϵ$，如果$f$用线性函数进行估计的话，可以得到式3.4：</p>
-<p><script type="math/tex">Y=β_0+β_1X+ϵ</script>            (3.4)</p>
-<p>​    其中$\beta_0$是截距项，$\beta_1$是斜率项，$\epsilon$是误差项。式3.4是population regression line。最小平方曲线可以通过式3.4进行计算。从基础上来说，两条曲线的区别是对大数据量标准统计方法的扩展。在一般的模型中，数据样本的均值$\mu$是未知的，一种可行的估计方法是$\mu = \overline y$，其中$\overline y$ 是抽到的样本的均值。</p>
-<p>​     如果使用样本均值$\hat \mu$对$\mu$的估计是unbiased。那么评估这种估计的效果可以用$SE(\hat \mu)$描述，即为$\hat \mu$的标准误差。具体的方差公式可以用式3.5确定：</p>
-<p><script type="math/tex">Var(\hat \mu) = SE(\mu)^2 = \frac{\sigma^2} {n}</script>            (3.5)</p>
-<p>​    这其中$\sigma$是输出量$Y$中一系列$y_i$的标准差。在之前的线性估计中，可以使用式3.6来估计$\beta_0$</p>
-<p>和$\beta_1$的标准误差(SE)。</p>
-<p><script type="math/tex">SE(\hat \beta_0)^2 = \sigma^2[\frac 1n + \frac{\overline x^2}{\sum_{i = 1} ^ {n}(x_i - \overline x)}], SE(\hat \beta_1)^2 = \frac{\sigma^2}{\sum_{i = 1}^{n}(x_i - \overline x)}</script>        (3.6)</p>
-<p>​    其中$\sigma^2 = Var(\epsilon)$。为了确保这些公式的有效性，需要假设对每个观测点的误差$\epsilon_i$与公共的误差 $\sigma^2$不相关。值得注意的几点是，$SE(\hat \beta_1)$的值将会更小，如果$x_i$的分布更为分散，如果$\overline x$为0的话，$SE(\hat \beta_0)$将与$SE(\hat \mu)$的值相等。总体来说，$\sigma^2$是未知的。估计的$\sigma$被认作残余标准误差，RSE可以通过这个公式计算：$RSE=\sqrt {RSS/(n−2)}$。标准误差可以用置信区间来计算。对于线性回归来说，$\beta_1$的95%置信区间的格式如下，式3.7：</p>
-<p><script type="math/tex">\hat \beta_1 \pm 2*SE(\hat \beta_1)</script>                    (3.7)</p>
-<p>​    在这个区间之内有95%的概率。在假设检验中，$\beta_1$是描述$X$和$Y$的关系强弱的大小的量。在实际情况中，我们计算<strong>t-统计量</strong>,式3.8:</p>
-<p><script type="math/tex">t = \frac {\hat \beta_1 - 0}{SE(\hat \beta_1)}</script>                        (3.8)</p>
-<p>​    在上式中，如果$X$和$Y$之间没有相关性的话，那么t-分布的自由度就是$n - 2$。另外，在$β_1=0$的情况下，统计量的绝对值大于等于$|t|$时的概率即为p值。一个很小的p值表示预测子和响应之间的一种很强烈的联系。</p>
-<p>​    大概来说，回归的实际响应曲线根据以下公式3.9进行计算：</p>
-<p><script type="math/tex">RSE = \sqrt{\frac{1}{n - 2}RSS} = \sqrt {\frac {1}{n - 2} \sum_{i = 1}^{n}(y_i - \hat y_i)^2}</script>            (3.9)</p>
-<p>​    而在前面的定义中，RSS的计算结果为（式3.10）：</p>
-<p><script type="math/tex">RSS = \sum_{i = 1}^{n}(y_i - \hat y_i)^2</script>                        (3.10)</p>
-<p>​    RSE被认为对模型3.5的拟合的缺少的情况。如果通过模型的预测结果与实际结果比较相近，也就是$\hat y_i \approx y_i$，其中$i=1,…,n$。</p>
-<p>​    虽然RSE可以用来衡量对模型的拟合程度，因为总是衡量$Y$的单元，但是我们并不清楚事什么导致了比较好的RSE的结果。而$R^2$统计量提供了一种方法，主要是一种比例的形式——也就是之前解释的variance——是一种对$Y$的独立程度的体现。</p>
-<p>​    为了计算$R^2$统计量，使用公式3.11：</p>
-<p><script type="math/tex">R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}</script>                (3.11)</p>
-<p>​    其中$TSS = \sum(y_i - \overline y)^2$，是对$y$与$\overline y$的差的平方和。TSS用来评估响应$Y$的总的variance，也可以被认为可变的固有量的平方。而RSS一般用来测量回归之后的未解释的偏移量。因此，TSS - RSS测量了由执行回归过程之后的响应的差异的数量，之后$R^2$测量了$Y$可以用$X$解释的比例。$R^2$评估体系用来测定$X$和$Y$之间的关系。相关系数的定义如下：</p>
-<p><script type="math/tex">cor(X, Y) = \frac{\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sqrt {\sum_{i = 1}^{n}(x - x_i)} \sqrt{\sum_{i = 1} ^{n}(y_i - \overline y)}}</script>        (3.12)</p>
-<p>​    而这个相关系数也可以用来评估$X$和$Y$的线性相关关系。可以看到，在单变量线性回归中，$R^2 = r^2 = cor(X, Y)$， 但是对多变量模型来说就不同了。</p>
-<h3 id="多变量线性拟合"><a href="#多变量线性拟合" class="headerlink" title="多变量线性拟合"></a>多变量线性拟合</h3><p>​    多变量拟合公式：</p>
-<p><script type="math/tex">Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 +...+ \beta_p X_p + \epsilon</script>            (3.13)</p>
-<p>​    类似地，也可以对各个参数进行估计：</p>
-<p><script type="math/tex">\hat y = \hat \beta_0 + \hat \beta_1 x_1 + \hat \beta_2 x_2 +... + \hat \beta_px_p</script>                (3.14)</p>
-<p>​    RSS定义如下：</p>
-<p><script type="math/tex">RSS = \sum_{i =1}^{n}(y_i - \hat y_i)^2 = \sum_{i = 1}^{n}(y_i - \hat \beta_0 - \hat \beta_1 x_{i1} - ... -\hat \beta_p x_{ip})</script>        (3.15)</p>
-<p>​    在多变量的线性拟合中，我们需要集中精力解决下列问题：</p>
+<script type="math/tex; mode=display">Y≈β_0+β_1X$$                (3.1)
+
+​    其中$\approx$符号表示近似地表示为。在3.1中，$\beta_0$和$\beta_1$为两个未知的常数项，分别表示为截距和斜率。在统计学习中，我们通常要估计这两个系数，以实现良好的预测效果。令$\hat y_i = \hat \beta_0 + \hat \beta_1X$，
+
+为基于$X$中第$i$个数据的对$Y$的测试结果，$e_i = y_i - \hat y_i$代表第$i$ 个残余量，也就是估计值与实际值的差值。因此，我们定义如式3.2的最小残余方差(RSS):
+
+$$RSS=e_1^2+e_2^2+...+e_n^2$$                                                    (3.2a)
+
+$$RSS = (y_1 - \hat \beta_0 - \hat \beta_1x_1)^2 + (y_2 - \hat \beta_0 - \hat \beta_1x_2)^2 + ... + (y_n - \hat \beta_0 - \hat \beta_1x_n)^2$$        (3.2b)
+
+​    运用微分公式，求得当RSS最小时的$\hat \beta_0$与$\hat \beta_1$值为式3.3的结果：
+
+$$\beta_1 = \frac {\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sum_{i =1}^{n}(x_i - \overline x)}$$                (3.3a)
+
+$$\hat \beta_0 = \overline y - \hat \beta_1 \overline x$$                    (3.3b)
+
+​    式3.4定义了最小平方的参数估计。
+
+### 评估参数估计的准确性
+
+​    根据第二章的结果，$Y=f(X)+ϵ$，如果$f$用线性函数进行估计的话，可以得到式3.4：
+
+$$Y=β_0+β_1X+ϵ$$            (3.4)
+
+​    其中$\beta_0$是截距项，$\beta_1$是斜率项，$\epsilon$是误差项。式3.4是population regression line。最小平方曲线可以通过式3.4进行计算。从基础上来说，两条曲线的区别是对大数据量标准统计方法的扩展。在一般的模型中，数据样本的均值$\mu$是未知的，一种可行的估计方法是$\mu = \overline y$，其中$\overline y$ 是抽到的样本的均值。
+
+​     如果使用样本均值$\hat \mu$对$\mu$的估计是unbiased。那么评估这种估计的效果可以用$SE(\hat \mu)$描述，即为$\hat \mu$的标准误差。具体的方差公式可以用式3.5确定：
+
+$$Var(\hat \mu) = SE(\mu)^2 = \frac{\sigma^2} {n}$$            (3.5)
+
+​    这其中$\sigma$是输出量$Y$中一系列$y_i$的标准差。在之前的线性估计中，可以使用式3.6来估计$\beta_0$
+
+和$\beta_1$的标准误差(SE)。
+
+$$SE(\hat \beta_0)^2 = \sigma^2[\frac 1n + \frac{\overline x^2}{\sum_{i = 1} ^ {n}(x_i - \overline x)}], SE(\hat \beta_1)^2 = \frac{\sigma^2}{\sum_{i = 1}^{n}(x_i - \overline x)}$$        (3.6)
+
+​    其中$\sigma^2 = Var(\epsilon)$。为了确保这些公式的有效性，需要假设对每个观测点的误差$\epsilon_i$与公共的误差 $\sigma^2$不相关。值得注意的几点是，$SE(\hat \beta_1)$的值将会更小，如果$x_i$的分布更为分散，如果$\overline x$为0的话，$SE(\hat \beta_0)$将与$SE(\hat \mu)$的值相等。总体来说，$\sigma^2$是未知的。估计的$\sigma$被认作残余标准误差，RSE可以通过这个公式计算：$RSE=\sqrt {RSS/(n−2)}$。标准误差可以用置信区间来计算。对于线性回归来说，$\beta_1$的95%置信区间的格式如下，式3.7：
+
+$$\hat \beta_1 \pm 2*SE(\hat \beta_1)$$                    (3.7)
+
+​    在这个区间之内有95%的概率。在假设检验中，$\beta_1$是描述$X$和$Y$的关系强弱的大小的量。在实际情况中，我们计算**t-统计量**,式3.8:
+
+$$t = \frac {\hat \beta_1 - 0}{SE(\hat \beta_1)}$$                        (3.8)
+
+​    在上式中，如果$X$和$Y$之间没有相关性的话，那么t-分布的自由度就是$n - 2$。另外，在$β_1=0$的情况下，统计量的绝对值大于等于$|t|$时的概率即为p值。一个很小的p值表示预测子和响应之间的一种很强烈的联系。
+
+​    大概来说，回归的实际响应曲线根据以下公式3.9进行计算：
+
+$$RSE = \sqrt{\frac{1}{n - 2}RSS} = \sqrt {\frac {1}{n - 2} \sum_{i = 1}^{n}(y_i - \hat y_i)^2}$$            (3.9)
+
+​    而在前面的定义中，RSS的计算结果为（式3.10）：
+
+$$RSS = \sum_{i = 1}^{n}(y_i - \hat y_i)^2$$                        (3.10)
+
+​    RSE被认为对模型3.5的拟合的缺少的情况。如果通过模型的预测结果与实际结果比较相近，也就是$\hat y_i \approx y_i$，其中$i=1,…,n$。
+
+​    虽然RSE可以用来衡量对模型的拟合程度，因为总是衡量$Y$的单元，但是我们并不清楚事什么导致了比较好的RSE的结果。而$R^2$统计量提供了一种方法，主要是一种比例的形式——也就是之前解释的variance——是一种对$Y$的独立程度的体现。
+
+​    为了计算$R^2$统计量，使用公式3.11：
+
+$$R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}$$                (3.11)
+
+​    其中$TSS = \sum(y_i - \overline y)^2$，是对$y$与$\overline y$的差的平方和。TSS用来评估响应$Y$的总的variance，也可以被认为可变的固有量的平方。而RSS一般用来测量回归之后的未解释的偏移量。因此，TSS - RSS测量了由执行回归过程之后的响应的差异的数量，之后$R^2$测量了$Y$可以用$X$解释的比例。$R^2$评估体系用来测定$X$和$Y$之间的关系。相关系数的定义如下：
+
+$$cor(X, Y) = \frac{\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sqrt {\sum_{i = 1}^{n}(x - x_i)} \sqrt{\sum_{i = 1} ^{n}(y_i - \overline y)}}$$        (3.12)
+
+​    而这个相关系数也可以用来评估$X$和$Y$的线性相关关系。可以看到，在单变量线性回归中，$R^2 = r^2 = cor(X, Y)$， 但是对多变量模型来说就不同了。
+
+### 多变量线性拟合 ###
+
+​    多变量拟合公式：
+
+$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 +...+ \beta_p X_p + \epsilon$$            (3.13)
+
+​    类似地，也可以对各个参数进行估计：
+
+$$\hat y = \hat \beta_0 + \hat \beta_1 x_1 + \hat \beta_2 x_2 +... + \hat \beta_px_p$$                (3.14)
+
+​    RSS定义如下：
+
+$$RSS = \sum_{i =1}^{n}(y_i - \hat y_i)^2 = \sum_{i = 1}^{n}(y_i - \hat \beta_0 - \hat \beta_1 x_{i1} - ... -\hat \beta_p x_{ip})$$        (3.15)
+
+​    在多变量的线性拟合中，我们需要集中精力解决下列问题：
+
+1. 是否在一系列预测子$X_1, X_2, ..., X_p$中存在至少一个游泳的预测结果？
+2. 是一部分预测子对$Y$的解释有贡献， 还是所有的预测子有贡献？
+3. 这个模型对数据的拟合情况如何？
+4. 给定一系列预测值，最后得到什么响应值以及预测的准确性如何？
+
+​    接下来进行具体的分析：
+
+<br>
+
+**1. 是否在响应值以及预测值之间存在关系？**
+
+​    上述问题等价于下述假设$H_0$：
+
+​    $$H_0: \beta_1 = \beta_2 = ... = \beta_p = 0</script><p>​    这个假设测试是通过计算<strong>F-统计量</strong>，</p>
+<p>​    <script type="math/tex">F = \frac {(TSS - RSS) / p}{RSS / (n - p - 1)}</script>            (3.16)</p>
+<p>​    在其中，TSS与RSS和简单线性回归里面的定义一致：</p>
+<p>​    <script type="math/tex">E(RSS / (n - p - 1)) = \sigma^2</script></p>
+<p>​    假设$H_0$是正确的，那么应该满足：</p>
+<p>​    <script type="math/tex">E((TSS - RSS) / p) = \sigma^2</script></p>
+<p>​    在这里我们应该期望F-统计值接近1，另外，如果$H_0$是错误的，那么$E()(TSS -RSS) / p) &gt; \sigma^2$, 也就是F-统计量大于1。</p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1od38g00004ouayqwirc0f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1p7oaq0001pwuaz7mzkxv0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjg1od38q00024ouadgb00q41" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjg1p7oak0000pwua3zgv4thl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -264,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg1od38n00014ouankuk6rze" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg1p7oat0002pwuamnnkrkr1" class="article-share-link">Share</a>
       
       
     </footer>
