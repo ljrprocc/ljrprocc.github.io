@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-15T12:56:02.351Z">
+<meta property="og:updated_time" content="2018-04-16T03:18:39.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3">
 <meta name="twitter:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
@@ -132,14 +132,23 @@
 <p>​    虽然RSE可以用来衡量对模型的拟合程度，因为总是衡量$Y$的单元，但是我们并不清楚事什么导致了比较好的RSE的结果。而$R^2$统计量提供了一种方法，主要是一种比例的形式——也就是之前解释的variance——是一种对$Y$的独立程度的体现。</p>
 <p>​    为了计算$R^2$统计量，使用公式3.11：</p>
 <p><script type="math/tex">R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}</script>                (3.11)</p>
-<p>​    其中$TSS = \sum(y_i - \overline y)^2​$，是对$y​$与$\overline y​$的差的平方和。TSS用来评估响应$Y​$的总的variance，也可以被认为可变的固有量的平方。</p>
+<p>​    其中$TSS = \sum(y_i - \overline y)^2$，是对$y$与$\overline y$的差的平方和。TSS用来评估响应$Y$的总的variance，也可以被认为可变的固有量的平方。而RSS一般用来测量回归之后的未解释的偏移量。因此，TSS - RSS测量了由执行回归过程之后的响应的差异的数量，之后$R^2$测量了$Y$可以用$X$解释的比例。$R^2$评估体系用来测定$X$和$Y$之间的关系。相关系数的定义如下：</p>
+<p><script type="math/tex">cor(X, Y) = \frac{\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sqrt {\sum_{i = 1}^{n}(x - x_i)} \sqrt{\sum_{i = 1} ^{n}(y_i - \overline y)}}</script>        (3.12)</p>
+<p>​    而这个相关系数也可以用来评估$X$和$Y$的线性相关关系。可以看到，在单变量线性回归中，$R^2 = r^2 = cor(X, Y)$， 但是对多变量模型来说就不同了。</p>
+<h3 id="多变量线性拟合"><a href="#多变量线性拟合" class="headerlink" title="多变量线性拟合"></a>多变量线性拟合</h3><p>​    多变量拟合公式：</p>
+<p><script type="math/tex">Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 +...+ \beta_p X_p + \epsilon</script>            (3.13)</p>
 </li>
 </ul>
+<p>​            类似地，也可以对各个参数进行估计：</p>
+<p>​    <script type="math/tex">\hat y = \hat \beta_0 + \hat \beta_1 x_1 + \hat \beta_2 x_2 +... + \hat \beta_px_p</script>                (3.14)</p>
+<p>​        RSS定义如下：</p>
+<p>​    <script type="math/tex">RSS = \sum_{i =1}^{n}(y_i - \hat y_i)^2 = \sum_{i = 1}^{n}(y_i - \hat \beta_0 - \hat \beta_1 x_{i1} - ... -\hat \beta_p x_{ip})</script>        (3.15)</p>
+<p>​        在多变量的线性拟合中，我们需要集中精力解决下列问题：</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1mk89000021wuam7tfqrbe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1o8xhp0000z8uat1qflrj4" class="article-share-link">Share</a>
       
       
     </footer>
