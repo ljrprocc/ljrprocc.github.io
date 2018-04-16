@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-16T08:21:20.465Z">
+<meta property="og:updated_time" content="2018-04-16T08:39:11.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3">
 <meta name="twitter:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
@@ -166,14 +166,17 @@
 <p><strong>3.模型拟合</strong></p>
 <p>​    两种最常用的评估模型拟合的测量标准是RSE和$R^2$。在多变量模型中，$R^2 = Cor(Y, \hat Y)^2$, 也就是响应和模型拟合结果的相关系数的平方。在多变量线性拟合中，RSE定义如下：</p>
 <p><script type="math/tex">RSE = \sqrt {\frac{1}{n - p - 1}RSS}</script>                (3.18)</p>
-<p>​    可以看到随着$p$的增大，RSS的值会减小，但是总体的RSE的值会增大。</p>
+<p>​    可以看到随着$p$的增大，RSS的值会减小，但是总体的RSE的值会增大。另外，也可参考书中图3.5以建立一个可视化的印象。在模型拟合中，如果不同预测子之间不独立的话，就难以得到一个较好的线性拟合结果。</p>
+<p><strong>4.预测</strong></p>
+<p>​    在线性拟合的预测中，主要存在3方面的问题：</p>
+<p>（1）系数估计结果$\hat Y = \hat \beta_0 + \hat \beta_1X_1 + … + \hat \beta_pX_p$ , 只是一个真实回归模型$f(X) = \beta_0 + \beta_1X_1 + … + \beta_pX_p$的一个估计，是第二章提到的不可减少的误差。</p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1z00nv00005cua7lg0trww" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1zmyow0001x8ua6zgd8bae" class="article-share-link">Share</a>
       
       
     </footer>
