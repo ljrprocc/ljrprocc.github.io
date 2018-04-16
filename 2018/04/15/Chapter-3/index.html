@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-16T07:14:11.570Z">
+<meta property="og:updated_time" content="2018-04-16T08:21:20.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3">
 <meta name="twitter:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
@@ -159,14 +159,21 @@
 <p><script type="math/tex">F = \frac{(RSS_0 - RSS) / q}{RSS / (n - p - 1)}</script>        (3.17)</p>
 <p>​    这个逻辑对预测子$p$很大的时候有一些缺陷。当$p &gt; n$时，系数$\beta_j$比观测点总数要多， F-统计量就不适用了。</p>
 <p><strong>2.决定重要的子变量</strong></p>
-<p>​    </p>
+<p>​    由于在很多情况下我们都是使用$p$维变量的子集，而总模型个数为$2^p$个数。因此需要进行变量的选择。总共有三种传统的方法：</p>
+<p>（1）Forward selection. 用一个null model初始化，之后用$p$个简单的线性回归模型加入 到这个null model中，并使得RSS最小。这样的话，新的(p - 1)-变量模型的拟合完成，并且移除了具有最大p-值的一个变量。这个过程一直持续直到到达一个停止点。</p>
+<p>（2）Backward selection. 从具有所有变量的模型开始，逐一移除具有最大p-值的变量，直至到达一个停止点。这个最大p-值的意义是最不重要的一个变量。</p>
+<p>（3）Mixed selection. 两者的结合。主要是从无变量的模型开始，逐步增加变量直至找到提供best fit的变量组。</p>
+<p><strong>3.模型拟合</strong></p>
+<p>​    两种最常用的评估模型拟合的测量标准是RSE和$R^2$。在多变量模型中，$R^2 = Cor(Y, \hat Y)^2$, 也就是响应和模型拟合结果的相关系数的平方。在多变量线性拟合中，RSE定义如下：</p>
+<p><script type="math/tex">RSE = \sqrt {\frac{1}{n - p - 1}RSS}</script>                (3.18)</p>
+<p>​    可以看到随着$p$的增大，RSS的值会减小，但是总体的RSE的值会增大。</p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1wlnvm00012suaef26lnh3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg1z00nv00005cua7lg0trww" class="article-share-link">Share</a>
       
       
     </footer>
