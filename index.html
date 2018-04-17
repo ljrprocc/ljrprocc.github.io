@@ -188,12 +188,15 @@
 <p>​    另外一种使用线性回归的手段是多项式回归，后面第七章时会进行比较详细的介绍。</p>
 <p><strong>3.潜在的问题</strong></p>
 <p>主要问题有以下6个：</p>
-<p>（1）响应-预测的非线性关系。</p>
-<p>（2）误差项的相关性。</p>
-<p>（3）误差项的非常数方差。</p>
-<p>（4）Outliers。</p>
-<p>（5）高杠杆作用。</p>
-<p>（6）共线性。</p>
+<p>（1）响应-预测的非线性关系。在实际情况中，预测和响应的关系很有可能是非线性的。具体而言，可以使用残差图来表示。</p>
+<p>（2）误差项的相关性。随预测子变化误差项$\epsilon_1, \epsilon_2, …, \epsilon_n$应是线性无关的。否则其就会与数据量的size有关。</p>
+<p>（3）误差项的非常数方差。在实际情况中可能会出现随着响应值增加误差项方差增加的情况。其中一种比较可行的解决方案是将响应$Y$用凹函数进行替换。</p>
+<p>（4）Outliers。这个是指一个远偏离预测点的点$y_i$。计算得到的残差如果太大的话就可以判断为outliers。有可能是数据收集的时候出现问题，就可以移除掉这个点。这样能够大幅度减少RSE和$R^2$值。</p>
+<p>（5）高杠杆作用。与（4）相对应的是，该情况主要是$x_i$大幅度偏离常规的$x$范围的情况，通过图3.13和图3.12的对比可以看到除去那个High Leverage Points之后的得到更好的拟合结果。由于在多维线性回归中不易判断一个点是否位于其应该在的$X$范围。</p>
+<p>​     因此，为了判断其杠杆性，可以计算一个杠杆统计量：</p>
+<p><script type="math/tex">h_i = \frac 1n + \frac{(x_i - \overline x)^2}{\sum_{i' = 1}^{n}(x_{i'} - \overline x)^2}</script>            (3.23)</p>
+<p>​     其中，杠杆统计量$h_i$总是在 $1/n$和$1$之间，且$h_i$越大，$x_i$与平均值之间的差值越大，是一种距离中心的程度的度量。</p>
+<p>（6）共线性。2个或者更多预测子与另外一个相似度更高。根据课本图3.14和图3.15，可以看到在其二维的参数坐标里，RSS椭圆的离心率较小，可以看到当RSS较低时两个参数的线性相关性。</p>
 <p>下面逐一对其进行解释：</p>
 <p>​</p>
 </li>
@@ -202,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg2buxld0002wcua43wbc8sn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg3nqyqy0000uguafu399r32" class="article-share-link">Share</a>
       
       
     </footer>
@@ -269,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjg2buxl20000wcuaf9gxfip9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjg3nqyr70001ugua2gz3msgq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -315,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg2buxla0001wcuaor3zt9my" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg3nqyra0002uguabpj0s8gj" class="article-share-link">Share</a>
       
       
     </footer>
