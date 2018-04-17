@@ -292,22 +292,17 @@ $$h_i = \frac 1n + \frac{(x_i - \overline x)^2}{\sum_{i' = 1}^{n}(x_{i'} - \over
 
 ​    一种检测共线性的方法是查看预测子的相关矩阵。另外也有可能两个或两个更多之间的变量存在相关性。另外一种评估多线性的方法是使用方差膨胀因素（VIF）。最小可能VIF值是1，从而表现出了共线性的缺乏。当VIF值超过5-10的时候表明了共线性的问题数量。VIF的变量可以通过以下公式计算：
 
-​
-
-​    这里$R_{X_j | X_{-j}}^2$是$X_j$对其它所有预测子的回归$R^2$值。如果$R_{X_j | X_{-j}}^2$接近1，那么VIF值会很大。
-
-### KNN回归与线性回归的对比###
-
-​    线性回归是一种参数的方法，因为其提供了一种具体的函数表达式。参数方法可能存在函数表达式与实际情况相差较大的可能性。而KNN回归是一种最简单和最有名的方法。给定一个值$K$和预测点$x_0$，并且定义集合$N_0$为$K$个离$x_0$最近的点集，也就是：
-
-$$\hat f(x_0) = \frac 1K \sum_{x_i \in N_0}y_i​</script><p>​    其中$K$值的确定是根据bias-variance tradeoff。</p>
+$$VIF(\hat \beta_j) = \frac{1}{1 - R_{X_j | X_{-j}}^2}</script><p>​    这里$R_{X_j | X_{-j}}^2$是$X_j$对其它所有预测子的回归$R^2$值。如果$R_{X_j | X_{-j}}^2$接近1，那么VIF值会很大。</p>
+<h3 id="KNN回归与线性回归的对比"><a href="#KNN回归与线性回归的对比" class="headerlink" title="KNN回归与线性回归的对比"></a>KNN回归与线性回归的对比</h3><p>​    线性回归是一种参数的方法，因为其提供了一种具体的函数表达式。参数方法可能存在函数表达式与实际情况相差较大的可能性。而KNN回归是一种最简单和最有名的方法。给定一个值$K$和预测点$x_0$，并且定义集合$N_0$为$K$个离$x_0$最近的点集，也就是：</p>
+<p>​</p>
+<p>​    其中$K$值的确定是根据bias-variance tradeoff。</p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg3p45l600016suaqbxggyoo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg3p4v8500002wua73qjy1bj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -374,7 +369,7 @@ $$\hat f(x_0) = \frac 1K \sum_{x_i \in N_0}y_i​</script><p>​    其中$K$值
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjg3p45kz00006suafeqzk7ll" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjg3p4v8b00012wuawyf9e5yv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -420,7 +415,7 @@ $$\hat f(x_0) = \frac 1K \sum_{x_i \in N_0}y_i​</script><p>​    其中$K$值
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg3p45l900026sua6d1a1h4u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg3p4v8g00022wuaejhm7ogj" class="article-share-link">Share</a>
       
       
     </footer>
