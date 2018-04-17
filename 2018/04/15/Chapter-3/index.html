@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-17T13:08:25.229Z">
+<meta property="og:updated_time" content="2018-04-17T13:09:09.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3">
 <meta name="twitter:description" content="Chapter 3  Linear Regression几个问题首先了解一下：（什么信息对提供一个推荐系统是更为有效的）  输入和输出之间是否存在关系  两者的联系是否紧密  是否有多个输入对输出构成贡献  如何准确地评估这种影响  如何准确的进行预测  这种关系是否是线性  是否存在协同效应 ​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示： Y≈β_">
@@ -293,11 +293,11 @@ $$h_i = \frac 1n + \frac{(x_i - \overline x)^2}{\sum_{i' = 1}^{n}(x_{i'} - \over
 
 ​
 
-​    这里$R_{X_j | X_{-j}}^2$是$X_j$对其它所有预测子的回归$R^2$值。如果$R_{X_j | X_{-j}}^2$接近1，那么VIF值会很大。
+​    这里是$X_j$对其它所有预测子的回归$R^2$值。如果接近 1，那么VIF值会很大。
 
 ### KNN回归与线性回归的对比###
 
-​    线性回归是一种参数的方法，因为其提供了一种具体的函数表达式。参数方法可能存在函数表达式与实际情况相差较大的可能性。而KNN回归是一种最简单和最有名的方法。给定一个值$K$和预测点$x_0$，并且定义集合$N_0$为$K$个离$x_0$最近的点集，也就是：
+​    线性回归是一种参数的方法，因为其提供了一种具体的函数表达式。参数方法可能存在函数表达式与实际情况相差较大的可能性。而KNN回归是一种最简单和最有名的方法。给定一个值$K​$和预测点$x_0​$，并且定义集合$N_0​$为$K​$个离$x_0​$最近的点集，也就是：
 
 $$\hat f(x_0) = \frac 1K \sum_{x_i \in N_0}y_i</script><p>​</p>
 <p>​</p>
@@ -308,7 +308,7 @@ $$\hat f(x_0) = \frac 1K \sum_{x_i \in N_0}y_i</script><p>​</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg3op1mw0000x8uakg9c16db" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg3opza10001xoua2de6zhpu" class="article-share-link">Share</a>
       
       
     </footer>
