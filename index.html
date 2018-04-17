@@ -103,203 +103,110 @@
 </li>
 <li><p>是否存在协同效应</p>
 <p>​    为了解决这几个问题，首先来确定一个简单的线性回归模型。其基本关系可以按式3.1表示：</p>
-<script type="math/tex; mode=display">Y≈β_0+β_1X$$                (3.1)
-
-​    其中$\approx$符号表示近似地表示为。在3.1中，$\beta_0$和$\beta_1$为两个未知的常数项，分别表示为截距和斜率。在统计学习中，我们通常要估计这两个系数，以实现良好的预测效果。令$\hat y_i = \hat \beta_0 + \hat \beta_1X$，
-
-为基于$X$中第$i$个数据的对$Y$的测试结果，$e_i = y_i - \hat y_i$代表第$i$ 个残余量，也就是估计值与实际值的差值。因此，我们定义如式3.2的最小残余方差(RSS):
-
-$$RSS=e_1^2+e_2^2+...+e_n^2$$                                                    (3.2a)
-
-$$RSS = (y_1 - \hat \beta_0 - \hat \beta_1x_1)^2 + (y_2 - \hat \beta_0 - \hat \beta_1x_2)^2 + ... + (y_n - \hat \beta_0 - \hat \beta_1x_n)^2$$        (3.2b)
-
-​    运用微分公式，求得当RSS最小时的$\hat \beta_0$与$\hat \beta_1$值为式3.3的结果：
-
-$$\beta_1 = \frac {\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sum_{i =1}^{n}(x_i - \overline x)}$$                (3.3a)
-
-$$\hat \beta_0 = \overline y - \hat \beta_1 \overline x$$                    (3.3b)
-
-​    式3.4定义了最小平方的参数估计。
-
-### 评估参数估计的准确性
-
-​    根据第二章的结果，$Y=f(X)+ϵ$，如果$f$用线性函数进行估计的话，可以得到式3.4：
-
-$$Y=β_0+β_1X+ϵ$$            (3.4)
-
-​    其中$\beta_0$是截距项，$\beta_1$是斜率项，$\epsilon$是误差项。式3.4是population regression line。最小平方曲线可以通过式3.4进行计算。从基础上来说，两条曲线的区别是对大数据量标准统计方法的扩展。在一般的模型中，数据样本的均值$\mu$是未知的，一种可行的估计方法是$\mu = \overline y$，其中$\overline y$ 是抽到的样本的均值。
-
-​     如果使用样本均值$\hat \mu$对$\mu$的估计是unbiased。那么评估这种估计的效果可以用$SE(\hat \mu)$描述，即为$\hat \mu$的标准误差。具体的方差公式可以用式3.5确定：
-
-$$Var(\hat \mu) = SE(\mu)^2 = \frac{\sigma^2} {n}$$            (3.5)
-
-​    这其中$\sigma$是输出量$Y$中一系列$y_i$的标准差。在之前的线性估计中，可以使用式3.6来估计$\beta_0$
-
-和$\beta_1$的标准误差(SE)。
-
-$$SE(\hat \beta_0)^2 = \sigma^2[\frac 1n + \frac{\overline x^2}{\sum_{i = 1} ^ {n}(x_i - \overline x)}], SE(\hat \beta_1)^2 = \frac{\sigma^2}{\sum_{i = 1}^{n}(x_i - \overline x)}$$        (3.6)
-
-​    其中$\sigma^2 = Var(\epsilon)$。为了确保这些公式的有效性，需要假设对每个观测点的误差$\epsilon_i$与公共的误差 $\sigma^2$不相关。值得注意的几点是，$SE(\hat \beta_1)$的值将会更小，如果$x_i$的分布更为分散，如果$\overline x$为0的话，$SE(\hat \beta_0)$将与$SE(\hat \mu)$的值相等。总体来说，$\sigma^2$是未知的。估计的$\sigma$被认作残余标准误差，RSE可以通过这个公式计算：$RSE=\sqrt {RSS/(n−2)}$。标准误差可以用置信区间来计算。对于线性回归来说，$\beta_1$的95%置信区间的格式如下，式3.7：
-
-$$\hat \beta_1 \pm 2*SE(\hat \beta_1)$$                    (3.7)
-
-​    在这个区间之内有95%的概率。在假设检验中，$\beta_1$是描述$X$和$Y$的关系强弱的大小的量。在实际情况中，我们计算**t-统计量**,式3.8:
-
-$$t = \frac {\hat \beta_1 - 0}{SE(\hat \beta_1)}$$                        (3.8)
-
-​    在上式中，如果$X$和$Y$之间没有相关性的话，那么t-分布的自由度就是$n - 2$。另外，在$β_1=0$的情况下，统计量的绝对值大于等于$|t|$时的概率即为p值。一个很小的p值表示预测子和响应之间的一种很强烈的联系。
-
-​    大概来说，回归的实际响应曲线根据以下公式3.9进行计算：
-
-$$RSE = \sqrt{\frac{1}{n - 2}RSS} = \sqrt {\frac {1}{n - 2} \sum_{i = 1}^{n}(y_i - \hat y_i)^2}$$            (3.9)
-
-​    而在前面的定义中，RSS的计算结果为（式3.10）：
-
-$$RSS = \sum_{i = 1}^{n}(y_i - \hat y_i)^2$$                        (3.10)
-
-​    RSE被认为对模型3.5的拟合的缺少的情况。如果通过模型的预测结果与实际结果比较相近，也就是$\hat y_i \approx y_i$，其中$i=1,…,n$。
-
-​    虽然RSE可以用来衡量对模型的拟合程度，因为总是衡量$Y$的单元，但是我们并不清楚事什么导致了比较好的RSE的结果。而$R^2$统计量提供了一种方法，主要是一种比例的形式——也就是之前解释的variance——是一种对$Y$的独立程度的体现。
-
-​    为了计算$R^2$统计量，使用公式3.11：
-
-$$R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}$$                (3.11)
-
-​    其中$TSS = \sum(y_i - \overline y)^2$，是对$y$与$\overline y$的差的平方和。TSS用来评估响应$Y$的总的variance，也可以被认为可变的固有量的平方。而RSS一般用来测量回归之后的未解释的偏移量。因此，TSS - RSS测量了由执行回归过程之后的响应的差异的数量，之后$R^2$测量了$Y$可以用$X$解释的比例。$R^2$评估体系用来测定$X$和$Y$之间的关系。相关系数的定义如下：
-
-$$cor(X, Y) = \frac{\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sqrt {\sum_{i = 1}^{n}(x - x_i)} \sqrt{\sum_{i = 1} ^{n}(y_i - \overline y)}}$$        (3.12)
-
-​    而这个相关系数也可以用来评估$X$和$Y$的线性相关关系。可以看到，在单变量线性回归中，$R^2 = r^2 = cor(X, Y)$， 但是对多变量模型来说就不同了。
-
-### 多变量线性拟合 ###
-
-​    多变量拟合公式：
-
-$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 +...+ \beta_p X_p + \epsilon$$            (3.13)
-
-​    类似地，也可以对各个参数进行估计：
-
-$$\hat y = \hat \beta_0 + \hat \beta_1 x_1 + \hat \beta_2 x_2 +... + \hat \beta_px_p$$                (3.14)
-
-​    RSS定义如下：
-
-$$RSS = \sum_{i =1}^{n}(y_i - \hat y_i)^2 = \sum_{i = 1}^{n}(y_i - \hat \beta_0 - \hat \beta_1 x_{i1} - ... -\hat \beta_p x_{ip})$$        (3.15)
-
-​    在多变量的线性拟合中，我们需要集中精力解决下列问题：
-
-1. 是否在一系列预测子$X_1, X_2, ..., X_p$中存在至少一个游泳的预测结果？
-2. 是一部分预测子对$Y$的解释有贡献， 还是所有的预测子有贡献？
-3. 这个模型对数据的拟合情况如何？
-4. 给定一系列预测值，最后得到什么响应值以及预测的准确性如何？
-
-​    接下来进行具体的分析：
-
-​**1. 是否在响应值以及预测值之间存在关系？**
-
-​    上述问题等价于下述假设$H_0$：$\beta_1 = \beta_2 = ... = \beta_p = 0$
-
-​    而上述假设则可以用**F-统计量**进行计算：
-
-$$F = \frac {(TSS - RSS) / p}{RSS /(n - p - 1)}$$            (3.16)
-
-​    其中，TSS与RSS和简单线性回归时的定义相同。如果线性模型的假设是准确的话，那么$E(RSS/(n - p - 1)) = \sigma^2$ ，假设$H_0$是正确的，那么$E((TSS - RSS) / p = \sigma^2)$。因此，当响应子与预测子之间没有实际的联系只是，可以期待F-统计量的值接近于1.另一方面，如果$H_0$不正确，那么$E((TSS - RSS) / p) > \sigma^2$，因此可以期待F-统计量大于1。
-
-​    值得注意的是，这里$RSS / (n - p - 1)$表示自由度为$n - p - 1$的有影响的预测序列$X_{p + 1},  X_{p + 2}, ..., X_n$的方差除以自由度，而$(TSS - RSS) / p$表示通过预测得到的回归方差除以自由度，是预测模型的准确性。是F-分布的定义。当$n$越大，可以接受的拒绝限越低。
-
-​    在式3.16中，使用了所有的前$p$项均为0，而有时我们只需要其中的$q$个子项为0即可，也就是$H_0:$$\beta_{p - q + 1} = \beta_{p - q + 2} = ... = \beta_p = 0$，假设残余方差和为$RSS_0$，此时的F-统计量为：
-
-$$F = \frac{(RSS_0 - RSS) / q}{RSS / (n - p - 1)}$$        (3.17)
-
-​    这个逻辑对预测子$p$很大的时候有一些缺陷。当$p > n$时，系数$\beta_j$比观测点总数要多， F-统计量就不适用了。
-
-**2.决定重要的子变量**
-
-​    由于在很多情况下我们都是使用$p$维变量的子集，而总模型个数为$2^p$个数。因此需要进行变量的选择。总共有三种传统的方法：
-
-（1）Forward selection. 用一个null model初始化，之后用$p$个简单的线性回归模型加入 到这个null model中，并使得RSS最小。这样的话，新的(p - 1)-变量模型的拟合完成，并且移除了具有最大p-值的一个变量。这个过程一直持续直到到达一个停止点。
-
-（2）Backward selection. 从具有所有变量的模型开始，逐一移除具有最大p-值的变量，直至到达一个停止点。这个最大p-值的意义是最不重要的一个变量。
-
-（3）Mixed selection. 两者的结合。主要是从无变量的模型开始，逐步增加变量直至找到提供best fit的变量组。
-
-**3.模型拟合**
-
-​    两种最常用的评估模型拟合的测量标准是RSE和$R^2$。在多变量模型中，$R^2 = Cor(Y, \hat Y)^2$, 也就是响应和模型拟合结果的相关系数的平方。在多变量线性拟合中，RSE定义如下：
-
-$$RSE = \sqrt {\frac{1}{n - p - 1}RSS}$$                (3.18)
-
-​    可以看到随着$p$的增大，RSS的值会减小，但是总体的RSE的值会增大。另外，也可参考书中图3.5以建立一个可视化的印象。在模型拟合中，如果不同预测子之间不独立的话，就难以得到一个较好的线性拟合结果。
-
-**4.预测**
-
-​    在线性拟合的预测中，主要存在3方面的问题：
-
-（1）系数估计结果$\hat Y = \hat \beta_0 + \hat \beta_1X_1 + ... + \hat \beta_pX_p$ , 只是一个真实回归模型$f(X) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p$的一个估计，是第二章提到的不可减少的误差。因此我们可以通过计算一个置信区间以表示$\hat Y$对$f(X)$的接近程度。
-
-（2）当然，也存在model bias的误差情况，即为与实际的误差。用以估计实际的最佳情况。
-
-（3）如果知道实际的$f(X)$的值，也就是知道$\beta_0, \beta_1, ..., \beta_p$的值，响应模型也不能进行准确的预测，因为不可减少的随机误差$\epsilon$。那么$Y$与$\hat Y$到底相差多少呢？这里使用一种预测区间来进行评估。预测区间通常比置信区间要打，因为它结合了对$f(X)$估计的误差（可减小的误差）以及对未知数据的误差（不可减小的误差）。
-
-### 关于回归模型的一些注意事项###
-
-**1. 定量的预测子**
-
-​    具有有限种情况的预测子，是离散的。比如，定义如下的预测子：
-
-$$x_i = \begin{cases}1,  & \text{if $i$th person is female} \\\\ 0, & \text{if $i$th person is male} \end{cases}$$                (3.19)
-
-​    那么，借鉴式(3.19)的思想，我们也可以实现这样的一个线性回归模型：
-
-$$y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases} \beta_0 + \beta_1 + \epsilon_i, & \text{if $i$th persion is female} \\\\ \beta_0+ \epsilon_i, & \text{if $i$th person is male }\end{cases}$$        (3.20)
-
-​    这就是一个分类的问题。当然，分类标准可能不止两类，两类的话可以对应到简单线性回归模型，而大于两类的话正好可以用多回归模型进行表示。这样的话相当于拓展了先行回国模型，对于不同类别的预测子使用不同的回归模型，以期更接近实际情况。
-
-**2.对线性回归的一个拓展**
-
-​    在实际情况中，对预测和响应来说最重要的两个关系是additive和linear。其中，additive是指一个预测子$X_i$对$Y$的影响不会影响到其它预测子对响应的影响，线性则是当响应$Y$改变时，$X_j$的变化是一个不与其本身有关的常量。那么，如果存在相互影响(interaction)呢？作者引入了如式（3.21）的可能的关系：
-
-$$Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_1X_2 + \epsilon$$        (3.21)
-
-​    事实上，这种存在interaction term的式子可以进行如下的化简：
-
-$$\begin{split}Y &= \beta_0 + (\beta_1 + \beta_3 X_2)X_1 + \beta_2 X_2 \\\\ &=\beta_0 + \beta_1^{\sim} X_1 + \beta_2X_2\end{split}$$        (3.22)
-
-​    其中$\beta_1^{\sim}$就与$X_2$相关。接下来介绍hierarchical principle，具体而言，是**如果我们要引入一个interaction term，那么我们必须要考虑其主要的影响，即使p值与系数的相关性并不是很明显。**具体而言，就是说如果$X_1$与$X_2$之间的联系对整个预测模型很重要的话，那么我们就必须将$X_1$和$X_2$均考虑在内，即使其p值很大。
-
-​    另外一种使用线性回归的手段是多项式回归，后面第七章时会进行比较详细的介绍。
-
-**3.潜在的问题**
-
-主要问题有以下6个：
-
-（1）响应-预测的非线性关系。在实际情况中，预测和响应的关系很有可能是非线性的。具体而言，可以使用残差图来表示。
-
-（2）误差项的相关性。随预测子变化误差项$\epsilon_1, \epsilon_2, ..., \epsilon_n$应是线性无关的。否则其就会与数据量的size有关。
-
-（3）误差项的非常数方差。在实际情况中可能会出现随着响应值增加误差项方差增加的情况。其中一种比较可行的解决方案是将响应$Y$用凹函数进行替换。
-
-（4）Outliers。这个是指一个远偏离预测点的点$y_i$。计算得到的残差如果太大的话就可以判断为outliers。有可能是数据收集的时候出现问题，就可以移除掉这个点。这样能够大幅度减少RSE和$R^2$值。
-
-（5）高杠杆作用。与（4）相对应的是，该情况主要是$x_i$大幅度偏离常规的$x$范围的情况，通过图3.13和图3.12的对比可以看到除去那个High Leverage Points之后的得到更好的拟合结果。由于在多维线性回归中不易判断一个点是否位于其应该在的$X$范围。
-
-​     因此，为了判断其杠杆性，可以计算一个杠杆统计量：
-
-$$h_i = \frac 1n + \frac{(x_i - \overline x)^2}{\sum_{i' = 1}^{n}(x_{i'} - \overline x)^2}$$            (3.23)
-
-​     其中，杠杆统计量$h_i$总是在 $1/n$和$1$之间，且$h_i$越大，$x_i$与平均值之间的差值越大，是一种距离中心的程度的度量。
-
-（6）共线性。2个或者更多预测子与另外一个相似度更高。根据课本图3.14和图3.15，可以看到在其二维的参数坐标里，RSS椭圆的离心率较小，可以看到当RSS较低时两个参数的线性相关性。共线性减少了回归系数的准确性，导致了$\hat \beta_j$的标准误差的增加。
-
-​    一种检测共线性的方法是查看预测子的相关矩阵。另外也有可能两个或两个更多之间的变量存在相关性。另外一种评估多线性的方法是使用方差膨胀因素（VIF）。最小可能VIF值是1，从而表现出了共线性的缺乏。当VIF值超过5-10的时候表明了共线性的问题数量。VIF的变量可以通过以下公式计算：
-
-$$VIF(\hat \beta_j) = \frac{1}{1 - R_{X_j | X_{-j}}^2}​</script><p>​    </p>
+<p><script type="math/tex">Y≈β_0+β_1X</script>                (3.1)</p>
+<p>​    其中$\approx$符号表示近似地表示为。在3.1中，$\beta_0$和$\beta_1$为两个未知的常数项，分别表示为截距和斜率。在统计学习中，我们通常要估计这两个系数，以实现良好的预测效果。令$\hat y_i = \hat \beta_0 + \hat \beta_1X$，</p>
+<p>为基于$X$中第$i$个数据的对$Y$的测试结果，$e_i = y_i - \hat y_i$代表第$i$ 个残余量，也就是估计值与实际值的差值。因此，我们定义如式3.2的最小残余方差(RSS):</p>
+<p><script type="math/tex">RSS=e_1^2+e_2^2+...+e_n^2</script>                                                    (3.2a)</p>
+<p><script type="math/tex">RSS = (y_1 - \hat \beta_0 - \hat \beta_1x_1)^2 + (y_2 - \hat \beta_0 - \hat \beta_1x_2)^2 + ... + (y_n - \hat \beta_0 - \hat \beta_1x_n)^2</script>        (3.2b)</p>
+<p>​    运用微分公式，求得当RSS最小时的$\hat \beta_0$与$\hat \beta_1$值为式3.3的结果：</p>
+<p><script type="math/tex">\beta_1 = \frac {\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sum_{i =1}^{n}(x_i - \overline x)}</script>                (3.3a)</p>
+<p><script type="math/tex">\hat \beta_0 = \overline y - \hat \beta_1 \overline x</script>                    (3.3b)</p>
+<p>​    式3.4定义了最小平方的参数估计。</p>
+<h3 id="评估参数估计的准确性"><a href="#评估参数估计的准确性" class="headerlink" title="评估参数估计的准确性"></a>评估参数估计的准确性</h3><p>​    根据第二章的结果，$Y=f(X)+ϵ$，如果$f$用线性函数进行估计的话，可以得到式3.4：</p>
+<p><script type="math/tex">Y=β_0+β_1X+ϵ</script>            (3.4)</p>
+<p>​    其中$\beta_0$是截距项，$\beta_1$是斜率项，$\epsilon$是误差项。式3.4是population regression line。最小平方曲线可以通过式3.4进行计算。从基础上来说，两条曲线的区别是对大数据量标准统计方法的扩展。在一般的模型中，数据样本的均值$\mu$是未知的，一种可行的估计方法是$\mu = \overline y$，其中$\overline y$ 是抽到的样本的均值。</p>
+<p>​     如果使用样本均值$\hat \mu$对$\mu$的估计是unbiased。那么评估这种估计的效果可以用$SE(\hat \mu)$描述，即为$\hat \mu$的标准误差。具体的方差公式可以用式3.5确定：</p>
+<p><script type="math/tex">Var(\hat \mu) = SE(\mu)^2 = \frac{\sigma^2} {n}</script>            (3.5)</p>
+<p>​    这其中$\sigma$是输出量$Y$中一系列$y_i$的标准差。在之前的线性估计中，可以使用式3.6来估计$\beta_0$</p>
+<p>和$\beta_1$的标准误差(SE)。</p>
+<p><script type="math/tex">SE(\hat \beta_0)^2 = \sigma^2[\frac 1n + \frac{\overline x^2}{\sum_{i = 1} ^ {n}(x_i - \overline x)}], SE(\hat \beta_1)^2 = \frac{\sigma^2}{\sum_{i = 1}^{n}(x_i - \overline x)}</script>        (3.6)</p>
+<p>​    其中$\sigma^2 = Var(\epsilon)$。为了确保这些公式的有效性，需要假设对每个观测点的误差$\epsilon_i$与公共的误差 $\sigma^2$不相关。值得注意的几点是，$SE(\hat \beta_1)$的值将会更小，如果$x_i$的分布更为分散，如果$\overline x$为0的话，$SE(\hat \beta_0)$将与$SE(\hat \mu)$的值相等。总体来说，$\sigma^2$是未知的。估计的$\sigma$被认作残余标准误差，RSE可以通过这个公式计算：$RSE=\sqrt {RSS/(n−2)}$。标准误差可以用置信区间来计算。对于线性回归来说，$\beta_1$的95%置信区间的格式如下，式3.7：</p>
+<p><script type="math/tex">\hat \beta_1 \pm 2*SE(\hat \beta_1)</script>                    (3.7)</p>
+<p>​    在这个区间之内有95%的概率。在假设检验中，$\beta_1$是描述$X$和$Y$的关系强弱的大小的量。在实际情况中，我们计算<strong>t-统计量</strong>,式3.8:</p>
+<p><script type="math/tex">t = \frac {\hat \beta_1 - 0}{SE(\hat \beta_1)}</script>                        (3.8)</p>
+<p>​    在上式中，如果$X$和$Y$之间没有相关性的话，那么t-分布的自由度就是$n - 2$。另外，在$β_1=0$的情况下，统计量的绝对值大于等于$|t|$时的概率即为p值。一个很小的p值表示预测子和响应之间的一种很强烈的联系。</p>
+<p>​    大概来说，回归的实际响应曲线根据以下公式3.9进行计算：</p>
+<p><script type="math/tex">RSE = \sqrt{\frac{1}{n - 2}RSS} = \sqrt {\frac {1}{n - 2} \sum_{i = 1}^{n}(y_i - \hat y_i)^2}</script>            (3.9)</p>
+<p>​    而在前面的定义中，RSS的计算结果为（式3.10）：</p>
+<p><script type="math/tex">RSS = \sum_{i = 1}^{n}(y_i - \hat y_i)^2</script>                        (3.10)</p>
+<p>​    RSE被认为对模型3.5的拟合的缺少的情况。如果通过模型的预测结果与实际结果比较相近，也就是$\hat y_i \approx y_i$，其中$i=1,…,n$。</p>
+<p>​    虽然RSE可以用来衡量对模型的拟合程度，因为总是衡量$Y$的单元，但是我们并不清楚事什么导致了比较好的RSE的结果。而$R^2$统计量提供了一种方法，主要是一种比例的形式——也就是之前解释的variance——是一种对$Y$的独立程度的体现。</p>
+<p>​    为了计算$R^2$统计量，使用公式3.11：</p>
+<p><script type="math/tex">R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}</script>                (3.11)</p>
+<p>​    其中$TSS = \sum(y_i - \overline y)^2$，是对$y$与$\overline y$的差的平方和。TSS用来评估响应$Y$的总的variance，也可以被认为可变的固有量的平方。而RSS一般用来测量回归之后的未解释的偏移量。因此，TSS - RSS测量了由执行回归过程之后的响应的差异的数量，之后$R^2$测量了$Y$可以用$X$解释的比例。$R^2$评估体系用来测定$X$和$Y$之间的关系。相关系数的定义如下：</p>
+<p><script type="math/tex">cor(X, Y) = \frac{\sum_{i = 1}^{n}(x_i - \overline x)(y_i - \overline y)}{\sqrt {\sum_{i = 1}^{n}(x - x_i)} \sqrt{\sum_{i = 1} ^{n}(y_i - \overline y)}}</script>        (3.12)</p>
+<p>​    而这个相关系数也可以用来评估$X$和$Y$的线性相关关系。可以看到，在单变量线性回归中，$R^2 = r^2 = cor(X, Y)$， 但是对多变量模型来说就不同了。</p>
+<h3 id="多变量线性拟合"><a href="#多变量线性拟合" class="headerlink" title="多变量线性拟合"></a>多变量线性拟合</h3><p>​    多变量拟合公式：</p>
+<p><script type="math/tex">Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 +...+ \beta_p X_p + \epsilon</script>            (3.13)</p>
+<p>​    类似地，也可以对各个参数进行估计：</p>
+<p><script type="math/tex">\hat y = \hat \beta_0 + \hat \beta_1 x_1 + \hat \beta_2 x_2 +... + \hat \beta_px_p</script>                (3.14)</p>
+<p>​    RSS定义如下：</p>
+<p><script type="math/tex">RSS = \sum_{i =1}^{n}(y_i - \hat y_i)^2 = \sum_{i = 1}^{n}(y_i - \hat \beta_0 - \hat \beta_1 x_{i1} - ... -\hat \beta_p x_{ip})</script>        (3.15)</p>
+<p>​    在多变量的线性拟合中，我们需要集中精力解决下列问题：</p>
+<ol>
+<li>是否在一系列预测子$X_1, X_2, …, X_p$中存在至少一个游泳的预测结果？</li>
+<li>是一部分预测子对$Y$的解释有贡献， 还是所有的预测子有贡献？</li>
+<li>这个模型对数据的拟合情况如何？</li>
+<li>给定一系列预测值，最后得到什么响应值以及预测的准确性如何？</li>
+</ol>
+<p>​    接下来进行具体的分析：</p>
+<p>​<strong>1. 是否在响应值以及预测值之间存在关系？</strong></p>
+<p>​    上述问题等价于下述假设$H_0$：$\beta_1 = \beta_2 = … = \beta_p = 0$</p>
+<p>​    而上述假设则可以用<strong>F-统计量</strong>进行计算：</p>
+<p><script type="math/tex">F = \frac {(TSS - RSS) / p}{RSS /(n - p - 1)}</script>            (3.16)</p>
+<p>​    其中，TSS与RSS和简单线性回归时的定义相同。如果线性模型的假设是准确的话，那么$E(RSS/(n - p - 1)) = \sigma^2$ ，假设$H_0$是正确的，那么$E((TSS - RSS) / p = \sigma^2)$。因此，当响应子与预测子之间没有实际的联系只是，可以期待F-统计量的值接近于1.另一方面，如果$H_0$不正确，那么$E((TSS - RSS) / p) &gt; \sigma^2$，因此可以期待F-统计量大于1。</p>
+<p>​    值得注意的是，这里$RSS / (n - p - 1)$表示自由度为$n - p - 1$的有影响的预测序列$X_{p + 1},  X_{p + 2}, …, X_n$的方差除以自由度，而$(TSS - RSS) / p$表示通过预测得到的回归方差除以自由度，是预测模型的准确性。是F-分布的定义。当$n$越大，可以接受的拒绝限越低。</p>
+<p>​    在式3.16中，使用了所有的前$p$项均为0，而有时我们只需要其中的$q$个子项为0即可，也就是$H_0:$$\beta_{p - q + 1} = \beta_{p - q + 2} = … = \beta_p = 0$，假设残余方差和为$RSS_0$，此时的F-统计量为：</p>
+<p><script type="math/tex">F = \frac{(RSS_0 - RSS) / q}{RSS / (n - p - 1)}</script>        (3.17)</p>
+<p>​    这个逻辑对预测子$p$很大的时候有一些缺陷。当$p &gt; n$时，系数$\beta_j$比观测点总数要多， F-统计量就不适用了。</p>
+<p><strong>2.决定重要的子变量</strong></p>
+<p>​    由于在很多情况下我们都是使用$p$维变量的子集，而总模型个数为$2^p$个数。因此需要进行变量的选择。总共有三种传统的方法：</p>
+<p>（1）Forward selection. 用一个null model初始化，之后用$p$个简单的线性回归模型加入 到这个null model中，并使得RSS最小。这样的话，新的(p - 1)-变量模型的拟合完成，并且移除了具有最大p-值的一个变量。这个过程一直持续直到到达一个停止点。</p>
+<p>（2）Backward selection. 从具有所有变量的模型开始，逐一移除具有最大p-值的变量，直至到达一个停止点。这个最大p-值的意义是最不重要的一个变量。</p>
+<p>（3）Mixed selection. 两者的结合。主要是从无变量的模型开始，逐步增加变量直至找到提供best fit的变量组。</p>
+<p><strong>3.模型拟合</strong></p>
+<p>​    两种最常用的评估模型拟合的测量标准是RSE和$R^2$。在多变量模型中，$R^2 = Cor(Y, \hat Y)^2$, 也就是响应和模型拟合结果的相关系数的平方。在多变量线性拟合中，RSE定义如下：</p>
+<p><script type="math/tex">RSE = \sqrt {\frac{1}{n - p - 1}RSS}</script>                (3.18)</p>
+<p>​    可以看到随着$p$的增大，RSS的值会减小，但是总体的RSE的值会增大。另外，也可参考书中图3.5以建立一个可视化的印象。在模型拟合中，如果不同预测子之间不独立的话，就难以得到一个较好的线性拟合结果。</p>
+<p><strong>4.预测</strong></p>
+<p>​    在线性拟合的预测中，主要存在3方面的问题：</p>
+<p>（1）系数估计结果$\hat Y = \hat \beta_0 + \hat \beta_1X_1 + … + \hat \beta_pX_p$ , 只是一个真实回归模型$f(X) = \beta_0 + \beta_1X_1 + … + \beta_pX_p$的一个估计，是第二章提到的不可减少的误差。因此我们可以通过计算一个置信区间以表示$\hat Y$对$f(X)$的接近程度。</p>
+<p>（2）当然，也存在model bias的误差情况，即为与实际的误差。用以估计实际的最佳情况。</p>
+<p>（3）如果知道实际的$f(X)$的值，也就是知道$\beta_0, \beta_1, …, \beta_p$的值，响应模型也不能进行准确的预测，因为不可减少的随机误差$\epsilon$。那么$Y$与$\hat Y$到底相差多少呢？这里使用一种预测区间来进行评估。预测区间通常比置信区间要打，因为它结合了对$f(X)$估计的误差（可减小的误差）以及对未知数据的误差（不可减小的误差）。</p>
+<h3 id="关于回归模型的一些注意事项"><a href="#关于回归模型的一些注意事项" class="headerlink" title="关于回归模型的一些注意事项"></a>关于回归模型的一些注意事项</h3><p><strong>1. 定量的预测子</strong></p>
+<p>​    具有有限种情况的预测子，是离散的。比如，定义如下的预测子：</p>
+<p><script type="math/tex">x_i = \begin{cases}1,  & \text{if $i$th person is female} \\\\ 0, & \text{if $i$th person is male} \end{cases}</script>                (3.19)</p>
+<p>​    那么，借鉴式(3.19)的思想，我们也可以实现这样的一个线性回归模型：</p>
+<p><script type="math/tex">y_i = \beta_0 + \beta_1 x_i + \epsilon_i = \begin{cases} \beta_0 + \beta_1 + \epsilon_i, & \text{if $i$th persion is female} \\\\ \beta_0+ \epsilon_i, & \text{if $i$th person is male }\end{cases}</script>        (3.20)</p>
+<p>​    这就是一个分类的问题。当然，分类标准可能不止两类，两类的话可以对应到简单线性回归模型，而大于两类的话正好可以用多回归模型进行表示。这样的话相当于拓展了先行回国模型，对于不同类别的预测子使用不同的回归模型，以期更接近实际情况。</p>
+<p><strong>2.对线性回归的一个拓展</strong></p>
+<p>​    在实际情况中，对预测和响应来说最重要的两个关系是additive和linear。其中，additive是指一个预测子$X_i$对$Y$的影响不会影响到其它预测子对响应的影响，线性则是当响应$Y$改变时，$X_j$的变化是一个不与其本身有关的常量。那么，如果存在相互影响(interaction)呢？作者引入了如式（3.21）的可能的关系：</p>
+<p><script type="math/tex">Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_1X_2 + \epsilon</script>        (3.21)</p>
+<p>​    事实上，这种存在interaction term的式子可以进行如下的化简：</p>
+<p><script type="math/tex">\begin{split}Y &= \beta_0 + (\beta_1 + \beta_3 X_2)X_1 + \beta_2 X_2 \\\\ &=\beta_0 + \beta_1^{\sim} X_1 + \beta_2X_2\end{split}</script>        (3.22)</p>
+<p>​    其中$\beta_1^{\sim}$就与$X_2$相关。接下来介绍hierarchical principle，具体而言，是<strong>如果我们要引入一个interaction term，那么我们必须要考虑其主要的影响，即使p值与系数的相关性并不是很明显。</strong>具体而言，就是说如果$X_1$与$X_2$之间的联系对整个预测模型很重要的话，那么我们就必须将$X_1$和$X_2$均考虑在内，即使其p值很大。</p>
+<p>​    另外一种使用线性回归的手段是多项式回归，后面第七章时会进行比较详细的介绍。</p>
+<p><strong>3.潜在的问题</strong></p>
+<p>主要问题有以下6个：</p>
+<p>（1）响应-预测的非线性关系。在实际情况中，预测和响应的关系很有可能是非线性的。具体而言，可以使用残差图来表示。</p>
+<p>（2）误差项的相关性。随预测子变化误差项$\epsilon_1, \epsilon_2, …, \epsilon_n$应是线性无关的。否则其就会与数据量的size有关。</p>
+<p>（3）误差项的非常数方差。在实际情况中可能会出现随着响应值增加误差项方差增加的情况。其中一种比较可行的解决方案是将响应$Y$用凹函数进行替换。</p>
+<p>（4）Outliers。这个是指一个远偏离预测点的点$y_i$。计算得到的残差如果太大的话就可以判断为outliers。有可能是数据收集的时候出现问题，就可以移除掉这个点。这样能够大幅度减少RSE和$R^2$值。</p>
+<p>（5）高杠杆作用。与（4）相对应的是，该情况主要是$x_i$大幅度偏离常规的$x$范围的情况，通过图3.13和图3.12的对比可以看到除去那个High Leverage Points之后的得到更好的拟合结果。由于在多维线性回归中不易判断一个点是否位于其应该在的$X$范围。</p>
+<p>​     因此，为了判断其杠杆性，可以计算一个杠杆统计量：</p>
+<p><script type="math/tex">h_i = \frac 1n + \frac{(x_i - \overline x)^2}{\sum_{i' = 1}^{n}(x_{i'} - \overline x)^2}</script>            (3.23)</p>
+<p>​     其中，杠杆统计量$h_i$总是在 $1/n$和$1$之间，且$h_i$越大，$x_i$与平均值之间的差值越大，是一种距离中心的程度的度量。</p>
+<p>（6）共线性。2个或者更多预测子与另外一个相似度更高。根据课本图3.14和图3.15，可以看到在其二维的参数坐标里，RSS椭圆的离心率较小，可以看到当RSS较低时两个参数的线性相关性。共线性减少了回归系数的准确性，导致了$\hat \beta_j​$的标准误差的增加。</p>
+<p>​    一种检测共线性的方法是查看预测子的相关矩阵。另外也有可能两个或两个更多之间的变量存在相关性。另外一种评估多线性的方法是使用方差膨胀因素（VIF）。最小可能VIF值是1，从而表现出了共线性的缺乏。当VIF值超过5-10的时候表明了共线性的问题数量。VIF的变量可以通过以下公式计算：</p>
+<p>​</p>
+<p>​    </p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg3p2t6200007guauul7s60d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg3p3eyy0001loua84lkksz1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -366,7 +273,7 @@ $$VIF(\hat \beta_j) = \frac{1}{1 - R_{X_j | X_{-j}}^2}​</script><p>​    </p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjg3p2t6h00017gua2cr44cas" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjg3p3eys0000louafr0jx2fz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -412,7 +319,7 @@ $$VIF(\hat \beta_j) = \frac{1}{1 - R_{X_j | X_{-j}}^2}​</script><p>​    </p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg3p2t6j00027guaj4szmsdv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg3p3ez20002louayzk2g3yy" class="article-share-link">Share</a>
       
       
     </footer>
