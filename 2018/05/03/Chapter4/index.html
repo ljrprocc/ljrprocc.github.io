@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 4   Classification适用于输出结果是有限类的情况。 为何不能是线性回归？因为目前没有有效的方法将定量的连续的预测结果转化为定性的和离散的。此外，线性回归模型中很有可能出现大于1或者小于0的情况，因此考虑逻辑斯蒂函数： p(X)  = \frac {e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}$$(4.1)">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-04T12:31:11.477Z">
+<meta property="og:updated_time" content="2018-05-04T12:32:16.559Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter4">
 <meta name="twitter:description" content="Chapter 4   Classification适用于输出结果是有限类的情况。 为何不能是线性回归？因为目前没有有效的方法将定量的连续的预测结果转化为定性的和离散的。此外，线性回归模型中很有可能出现大于1或者小于0的情况，因此考虑逻辑斯蒂函数： p(X)  = \frac {e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}$$(4.1)">
@@ -138,7 +138,7 @@ $$\delta_k(x) = x \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2}+log(\pi_k)$
 
 ​    在实践中，即使我们能够确定$X$在每一类中服从高斯分布，我们仍然需要估计每一类的参数，也就是$\mu_1, ..., \mu_K, \pi_1, ..., \pi_K, \sigma^2$。具体而言，可以用以下公式：
 
-$$\hat \mu_k</script><p><script type="math/tex">\hat \sigma^2 = \frac{1}{n - K} \sum_{k = 1}^K \sum_{i:y_i = k} (x_i - \hat \mu_k)^2</script>            (4.8)</p>
+$$= \frac{1}{n_k}\sum_{i : y_i = k}x_i</script><p><script type="math/tex">\hat \sigma^2 = \frac{1}{n - K} \sum_{k = 1}^K \sum_{i:y_i = k} (x_i - \hat \mu_k)^2</script>            (4.8)</p>
 <p>​    在其中，$n_k​$是第$k​$类的样本总数，$n​$是总的训练观测点数。LDA估计$\pi_k​$为属于第$k​$类的观测点数占总观测点的比例。因此可以确定$\hat \pi_k = n_k / n​$。将之代入到式(4.7)中，可以得到：</p>
 <p><script type="math/tex">\hat \delta_k(x) = x \frac{\hat \mu_k}{\hat \sigma^2} - \frac{\hat \mu_k^2}{2\hat \sigma^2}+log(\hat \pi_k)</script>        (4.9)</p>
 <p>​    使得式(4.9)最大。</p>
@@ -147,7 +147,7 @@ $$\hat \mu_k</script><p><script type="math/tex">\hat \sigma^2 = \frac{1}{n - K} 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgrxupe00002dguamhm58fw5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgrxw31r0001nwuaqjwt3u2d" class="article-share-link">Share</a>
       
       
     </footer>
