@@ -116,16 +116,16 @@
 <p><script type="math/tex">\delta_k(x) = x \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2}+log(\pi_k)</script>        (4.7)</p>
 <p>最大。如果$K = 2$，以及$\pi_1 = \pi_2$，那么当满足$2x(\mu_1 - \mu_2)&gt;\mu_1^2 - \mu_2^2$时归到类1，否则就归到类2。</p>
 <p>​    在实践中，即使我们能够确定$X$在每一类中服从高斯分布，我们仍然需要估计每一类的参数，也就是$\mu_1, …, \mu_K, \pi_1, …, \pi_K, \sigma^2$。具体而言，可以用以下公式：</p>
-<p><script type="math/tex">\hat \sigma^2 = \frac{1}{n - K} \sum_{k = 1}^K \sum_{i:y_i = k} (x_i - \hat \mu_k)^2</script>            (4.8)</p>
-<p>​    在其中，$n_k​$是第$k​$类的样本总数，$n​$是总的训练观测点数。LDA估计$\pi_k​$为属于第$k​$类的观测点数占总观测点的比例。因此可以确定$\hat \pi_k = n_k / n​$。将之代入到式(4.7)中，可以得到：</p>
+<p><script type="math/tex">\hat \mu = \frac{1}{n_k}\sum_{i: y_i = k}x_i \\\\\hat \sigma^2 = \frac{1}{n - K} \sum_{k = 1}^K \sum_{i:y_i = k} (x_i - \hat \mu_k)^2</script>            (4.8)</p>
+<p>​    在其中，$n_k$是第$k$类的样本总数，$n$是总的训练观测点数。LDA估计$\pi_k$为属于第$k$类的观测点数占总观测点的比例。因此可以确定$\hat \pi_k = n_k / n$。将之代入到式(4.7)中，可以得到：</p>
 <p><script type="math/tex">\hat \delta_k(x) = x \frac{\hat \mu_k}{\hat \sigma^2} - \frac{\hat \mu_k^2}{2\hat \sigma^2}+log(\hat \pi_k)</script>        (4.9)</p>
 <p>​    使得式(4.9)最大。</p>
-<p>​    对于多维度$p &gt; 1$的LDA</p>
+<p>​    对于多维度$p &gt; 1​$的LDA</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgry06vi00004sua5bcmt2kf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgry337v0002i8uaj82kun9t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -277,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjgry06vu00024suaem104qhl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjgry337s0001i8uajb0b8w89" class="article-share-link">Share</a>
       
       
     </footer>
@@ -344,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjgry06vq00014sua0zoq4lxz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjgry337j0000i8uacci9768p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -390,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjgry06vx00034suaq54b0ic7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjgry337x0003i8uajitpqr9l" class="article-share-link">Share</a>
       
       
     </footer>
