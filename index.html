@@ -65,6 +65,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Chapter4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/03/Chapter4/" class="article-date">
+  <time datetime="2018-05-03T05:29:31.000Z" itemprop="datePublished">2018-05-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/03/Chapter4/">Chapter4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Chapter-4-Classification"><a href="#Chapter-4-Classification" class="headerlink" title="Chapter 4   Classification"></a>Chapter 4   Classification</h2><p>适用于输出结果是有限类的情况。</p>
+<p>为何不能是线性回归？因为目前没有有效的方法将定量的连续的预测结果转化为定性的和离散的。此外，线性回归模型中很有可能出现大于1或者小于0的情况，因此考虑<strong>逻辑斯蒂函数：</strong></p>
+<p><script type="math/tex">p(X)  = \frac {e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}</script>(4.1)</p>
+<h3 id="Logistic模型"><a href="#Logistic模型" class="headerlink" title="Logistic模型"></a>Logistic模型</h3><p>​    为了拟合模型（4.1），需要使用最大似然法进行估计。式（4.1）也可以写做如下形式：</p>
+<p><script type="math/tex">log(\frac{p(X)}{1 - p(X)}) = \beta_0 + \beta_1X</script>        (4.2)</p>
+<p>​    可以看到，$p(X)$的值被限制在$(0,1)$的范围之内。为了拟合模型(4.2)的最小方差，可以使用最大似然估计估计$\beta_0$和$\beta_1$。我们需要找到接近所有个体的参数估计$\hat \beta_0$和$\hat \beta_1$。可以使用似然函数进行估计：</p>
+<p><script type="math/tex">l(\beta_0, \beta) = \prod_{i:y_i = 1}p(x_i)\prod_{i':y_{i'} = 0}(1 - p(x_{i'}))</script>        (4.3)</p>
+<pre><code>### 多变量Logistic模型###
+</code></pre><p><script type="math/tex">log(\frac{p(X)}{1 - p(X)}) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p</script>        (4.4a)</p>
+<p><script type="math/tex">p(X) = \frac{e^{\beta_0 + \beta_1X_1 + ... +\beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... +\beta_pX_p}}</script>            (4.4b)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgrq7jpy0001s8uamtydlk9y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Chapter-3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/15/Chapter-3/" class="article-date">
@@ -200,14 +246,14 @@
 <p>​    一种检测共线性的方法是查看预测子的相关矩阵。另外也有可能两个或两个更多之间的变量存在相关性。另外一种评估多线性的方法是使用方差膨胀因素（VIF）。最小可能VIF值是1，从而表现出了共线性的缺乏。当VIF值超过5-10的时候表明了共线性的问题数量。VIF的变量可以通过以下公式计算：$VIF(\hat \beta_j)=(1 - R_{X_j|X_{-j}}^2)$</p>
 <p>​    这里$R_{X_j | X_{-j}}^2$是$X_j$对其它所有预测子的回归$R^2$值。如果$R_{X_j | X_{-j}}^2$接近1，那么VIF值会很大。</p>
 <h3 id="KNN回归与线性回归的对比"><a href="#KNN回归与线性回归的对比" class="headerlink" title="KNN回归与线性回归的对比"></a>KNN回归与线性回归的对比</h3><p>​    线性回归是一种参数的方法，因为其提供了一种具体的函数表达式。参数方法可能存在函数表达式与实际情况相差较大的可能性。而KNN回归是一种最简单和最有名的方法。给定一个值$K$和预测点$x_0$，并且定义集合$N_0$为$K$个离$x_0$最近的点集，也就是：$\hat f(x_0) = \frac 1K \sum_{x_i \in N_0}y_i$</p>
-<p>​    其中$K$值的确定是根据bias-variance tradeoff。</p>
+<p>​    其中$K$值的确定是根据bias-variance tradeoff。当$K$值很大的时候KNN仅仅表现出比MSE略好的特性。</p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjg3pi8vh0000z4uaep0rv98h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjgrq7jpr0000s8ua05uyppie" class="article-share-link">Share</a>
       
       
     </footer>
@@ -274,7 +320,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjg3pi8vq0001z4uaeb75xbjh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjgrq7jq50002s8uaaf2gk1us" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjg3pi8vt0002z4uaio90gg4z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjgrq7jq90003s8ua6h7q4xrb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -348,7 +394,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
     </div>
   </div>
 
@@ -359,6 +405,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/05/03/Chapter4/">Chapter4</a>
+          </li>
         
           <li>
             <a href="/2018/04/15/Chapter-3/">Chapter 3</a>
