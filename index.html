@@ -89,66 +89,43 @@
       
         <h2 id="Chapter-4-Classification"><a href="#Chapter-4-Classification" class="headerlink" title="Chapter 4   Classification"></a>Chapter 4   Classification</h2><p>适用于输出结果是有限类的情况。</p>
 <p>为何不能是线性回归？因为目前没有有效的方法将定量的连续的预测结果转化为定性的和离散的。此外，线性回归模型中很有可能出现大于1或者小于0的情况，因此考虑<strong>逻辑斯蒂函数：</strong></p>
-<script type="math/tex; mode=display">p(X)  = \frac {e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}$$(4.1)
-
-### Logistic模型###
-
-​    为了拟合模型（4.1），需要使用最大似然法进行估计。式（4.1）也可以写做如下形式：
-
-$$log(\frac{p(X)}{1 - p(X)}) = \beta_0 + \beta_1X$$        (4.2)
-
-​    可以看到，$p(X)$的值被限制在$(0,1)$的范围之内。为了拟合模型(4.2)的最小方差，可以使用最大似然估计估计$\beta_0$和$\beta_1$。我们需要找到接近所有个体的参数估计$\hat \beta_0$和$\hat \beta_1$。可以使用似然函数进行估计：
-
-$$l(\beta_0, \beta) = \prod_{i:y_i = 1}p(x_i)\prod_{i':y_{i'} = 0}(1 - p(x_{i'}))$$        (4.3)
-
-###多变量Logistic模型###
-
-$$log(\frac{p(X)}{1 - p(X)}) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p$$        (4.4a)
-
-$$p(X) = \frac{e^{\beta_0 + \beta_1X_1 + ... +\beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... +\beta_pX_p}}$$            (4.4b)
-
-​    在logistic模型中$p(X)$表示一种概率，即$X = (X_1, X_2, ..., X_n)$的概率。
-
-###LDA(线性判别分析)###
-
-​    在Logistic回归中，通常是通过构建$Pr(Y = k |X = x )$的logistic函数。为此考虑另外一个可行的方法，我们通过分离地对$X$的每一类（比如说$Y$值确定）建立分布模型，并使用贝叶斯定理来估计$Pr(Y = k |X = x )$。为何要用另一种方法呢？原因如下：
-
-- 当每一类都足够分离开的时候，对logistic回归模型的参数估计就会变得不稳定，而LDA不会有这个问题。
-
-- 如果$n$足够小，并且$X$在每一个类别中都可以近似为正态分布，那么LDA会比logistics回归稳定。
-
-- LDA更擅长区分两类以上。
-
-  ​
-
-​    而之前所提到的贝叶斯定理的表述如下：令$\pi_k$代表整体的或者是从第$k$类观察点中随机得到的先验概率。令$f_k(X) \equiv Pr(X = x | Y = k)$，为$X$在第$k$类中的观察点的概率密度，那么贝叶斯定理的公式表述如下：
-
-$$Pr(Y = k | X = x) = \frac{\pi_kf_k(x)}{\sum_{l = 1}^K\pi_lf_l(x)}$$        (4.5)
-
-   用$p_k(X)$表示概率$Pr(Y = k | X)$。但是在本模型中，估计$f_k(X)$更具有挑战性。我们将$p_k(X)$表述为后验概率。也就是说已经给定的预测值的观测点属于第$k$类。
-
-​    首先假设只有一个预测子$p = 1$。那么如果假设$f_k$是正态的或者高斯分布，那么其符合以下方程：
-
-$$f_k(x) = \frac{1}{\sqrt{2\pi}\sigma_k} exp(-\frac{1}{2\sigma_k^2}(x - \mu_k)^2)$$        (4.6)
-
-​    其中$\mu_k$和$\sigma_k^2$分别表示第$k$类预测变量的均值与方差。另外，我们假设每一类的方差相等，也就是$\sigma_1^2 = \sigma_2^2 = ... = \sigma_K^2$。将式(4.6)带入到(4.5)中，并取log，得到若使$p_k(x)$最大，则必须使得：
-
-$$\delta_k(x) = x \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2}+log(\pi_k)$$        (4.7)
-
-最大。如果$K = 2$，以及$\pi_1 = \pi_2$，那么当满足$2x(\mu_1 - \mu_2)>\mu_1^2 - \mu_2^2$时归到类1，否则就归到类2。
-
-​    在实践中，即使我们能够确定$X$在每一类中服从高斯分布，我们仍然需要估计每一类的参数，也就是$\mu_1, ..., \mu_K, \pi_1, ..., \pi_K, \sigma^2$。具体而言，可以用以下公式：
-
-$$f_x</script><p><script type="math/tex">\hat \sigma^2 = \frac{1}{n - K} \sum_{k = 1}^K \sum_{i:y_i = k} (x_i - \hat \mu_k)^2</script>            (4.8)</p>
-<p>​    在其中，$n_k$是第$k$类的样本总数，$n$是总的训练观测点数。LDA估计$\pi_k$为属于第$k$类的观测点数占总观测点的比例。因此可以确定$\hat \pi_k = n_k / n$。将之代入到式(4.7)中，可以得到：</p>
+<p><script type="math/tex">p(X)  = \frac {e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}</script>(4.1)</p>
+<h3 id="Logistic模型"><a href="#Logistic模型" class="headerlink" title="Logistic模型"></a>Logistic模型</h3><p>​    为了拟合模型（4.1），需要使用最大似然法进行估计。式（4.1）也可以写做如下形式：</p>
+<p><script type="math/tex">log(\frac{p(X)}{1 - p(X)}) = \beta_0 + \beta_1X</script>        (4.2)</p>
+<p>​    可以看到，$p(X)$的值被限制在$(0,1)$的范围之内。为了拟合模型(4.2)的最小方差，可以使用最大似然估计估计$\beta_0$和$\beta_1$。我们需要找到接近所有个体的参数估计$\hat \beta_0$和$\hat \beta_1$。可以使用似然函数进行估计：</p>
+<p><script type="math/tex">l(\beta_0, \beta) = \prod_{i:y_i = 1}p(x_i)\prod_{i':y_{i'} = 0}(1 - p(x_{i'}))</script>        (4.3)</p>
+<h3 id="多变量Logistic模型"><a href="#多变量Logistic模型" class="headerlink" title="多变量Logistic模型"></a>多变量Logistic模型</h3><p><script type="math/tex">log(\frac{p(X)}{1 - p(X)}) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p</script>        (4.4a)</p>
+<p><script type="math/tex">p(X) = \frac{e^{\beta_0 + \beta_1X_1 + ... +\beta_pX_p}}{1 + e^{\beta_0 + \beta_1X_1 + ... +\beta_pX_p}}</script>            (4.4b)</p>
+<p>​    在logistic模型中$p(X)$表示一种概率，即$X = (X_1, X_2, …, X_n)$的概率。</p>
+<h3 id="LDA-线性判别分析"><a href="#LDA-线性判别分析" class="headerlink" title="LDA(线性判别分析)"></a>LDA(线性判别分析)</h3><p>​    在Logistic回归中，通常是通过构建$Pr(Y = k |X = x )$的logistic函数。为此考虑另外一个可行的方法，我们通过分离地对$X$的每一类（比如说$Y$值确定）建立分布模型，并使用贝叶斯定理来估计$Pr(Y = k |X = x )$。为何要用另一种方法呢？原因如下：</p>
+<ul>
+<li><p>当每一类都足够分离开的时候，对logistic回归模型的参数估计就会变得不稳定，而LDA不会有这个问题。</p>
+</li>
+<li><p>如果$n$足够小，并且$X$在每一个类别中都可以近似为正态分布，那么LDA会比logistics回归稳定。</p>
+</li>
+<li><p>LDA更擅长区分两类以上。</p>
+<p>​</p>
+</li>
+</ul>
+<p>​    而之前所提到的贝叶斯定理的表述如下：令$\pi_k$代表整体的或者是从第$k$类观察点中随机得到的先验概率。令$f_k(X) \equiv Pr(X = x | Y = k)$，为$X$在第$k$类中的观察点的概率密度，那么贝叶斯定理的公式表述如下：</p>
+<p><script type="math/tex">Pr(Y = k | X = x) = \frac{\pi_kf_k(x)}{\sum_{l = 1}^K\pi_lf_l(x)}</script>        (4.5)</p>
+<p>   用$p_k(X)$表示概率$Pr(Y = k | X)$。但是在本模型中，估计$f_k(X)$更具有挑战性。我们将$p_k(X)$表述为后验概率。也就是说已经给定的预测值的观测点属于第$k$类。</p>
+<p>​    首先假设只有一个预测子$p = 1$。那么如果假设$f_k$是正态的或者高斯分布，那么其符合以下方程：</p>
+<p><script type="math/tex">f_k(x) = \frac{1}{\sqrt{2\pi}\sigma_k} exp(-\frac{1}{2\sigma_k^2}(x - \mu_k)^2)</script>        (4.6)</p>
+<p>​    其中$\mu_k$和$\sigma_k^2$分别表示第$k$类预测变量的均值与方差。另外，我们假设每一类的方差相等，也就是$\sigma_1^2 = \sigma_2^2 = … = \sigma_K^2$。将式(4.6)带入到(4.5)中，并取log，得到若使$p_k(x)$最大，则必须使得：</p>
+<p><script type="math/tex">\delta_k(x) = x \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2}+log(\pi_k)</script>        (4.7)</p>
+<p>最大。如果$K = 2$，以及$\pi_1 = \pi_2$，那么当满足$2x(\mu_1 - \mu_2)&gt;\mu_1^2 - \mu_2^2$时归到类1，否则就归到类2。</p>
+<p>​    在实践中，即使我们能够确定$X$在每一类中服从高斯分布，我们仍然需要估计每一类的参数，也就是$\mu_1, …, \mu_K, \pi_1, …, \pi_K, \sigma^2$。具体而言，可以用以下公式：</p>
+<p><script type="math/tex">\hat \sigma^2 = \frac{1}{n - K} \sum_{k = 1}^K \sum_{i:y_i = k} (x_i - \hat \mu_k)^2</script>            (4.8)</p>
+<p>​    在其中，$n_k​$是第$k​$类的样本总数，$n​$是总的训练观测点数。LDA估计$\pi_k​$为属于第$k​$类的观测点数占总观测点的比例。因此可以确定$\hat \pi_k = n_k / n​$。将之代入到式(4.7)中，可以得到：</p>
 <p><script type="math/tex">\hat \delta_k(x) = x \frac{\hat \mu_k}{\hat \sigma^2} - \frac{\hat \mu_k^2}{2\hat \sigma^2}+log(\hat \pi_k)</script>        (4.9)</p>
 <p>​    使得式(4.9)最大。</p>
-<p>​    对于多维度$p &gt; 1​$的LDA</p>
+<p>​    对于多维度$p &gt; 1$的LDA</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgrxzey30001vsuab02dtm7k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgry06vi00004sua5bcmt2kf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -300,7 +277,7 @@ $$f_x</script><p><script type="math/tex">\hat \sigma^2 = \frac{1}{n - K} \sum_{k
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjgrxzey90002vsua7jxemxy7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjgry06vu00024suaem104qhl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -367,7 +344,7 @@ $$f_x</script><p><script type="math/tex">\hat \sigma^2 = \frac{1}{n - K} \sum_{k
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjgrxzexm0000vsuab1zwxj6a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjgry06vq00014sua0zoq4lxz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -413,7 +390,7 @@ $$f_x</script><p><script type="math/tex">\hat \sigma^2 = \frac{1}{n - K} \sum_{k
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjgrxzeyc0003vsuah5ajc0lv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjgry06vx00034suaq54b0ic7" class="article-share-link">Share</a>
       
       
     </footer>
