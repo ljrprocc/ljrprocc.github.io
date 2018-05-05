@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="SL Notes">
 <meta property="og:description" content="Chapter 4   Classification适用于输出结果是有限类的情况。 为何不能是线性回归？因为目前没有有效的方法将定量的连续的预测结果转化为定性的和离散的。此外，线性回归模型中很有可能出现大于1或者小于0的情况，因此考虑逻辑斯蒂函数： p(X)  = \frac {e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}(4.1) Log">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/ljrprocc/ljrprocc.github.io/blob/master/2018/05/03/Chapter4/4-4.png?raw=true">
-<meta property="og:updated_time" content="2018-05-05T03:05:46.347Z">
+<meta property="og:image" content="https://github.com/ljrprocc/ljrprocc.github.io/blob/master/images/4-4.png?raw=true">
+<meta property="og:updated_time" content="2018-05-05T03:12:37.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter4">
 <meta name="twitter:description" content="Chapter 4   Classification适用于输出结果是有限类的情况。 为何不能是线性回归？因为目前没有有效的方法将定量的连续的预测结果转化为定性的和离散的。此外，线性回归模型中很有可能出现大于1或者小于0的情况，因此考虑逻辑斯蒂函数： p(X)  = \frac {e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}(4.1) Log">
-<meta name="twitter:image" content="https://github.com/ljrprocc/ljrprocc.github.io/blob/master/2018/05/03/Chapter4/4-4.png?raw=true">
+<meta name="twitter:image" content="https://github.com/ljrprocc/ljrprocc.github.io/blob/master/images/4-4.png?raw=true">
   
     <link rel="alternate" href="/atom.xml" title="SL Notes" type="application/atom+xml">
   
@@ -121,7 +121,7 @@
 <p>​    在其中，$n_k$是第$k$类的样本总数，$n$是总的训练观测点数。LDA估计$\pi_k$为属于第$k$类的观测点数占总观测点的比例。因此可以确定$\hat \pi_k = n_k / n$。将之代入到式(4.7)中，可以得到：</p>
 <p><script type="math/tex">\hat \delta_k(x) = x \frac{\hat \mu_k}{\hat \sigma^2} - \frac{\hat \mu_k^2}{2\hat \sigma^2}+log(\hat \pi_k)</script>        (4.9)</p>
 <p>​    使得式(4.9)最大。两个一维正态分布的例子如下：</p>
-<p><img src="https://github.com/ljrprocc/ljrprocc.github.io/blob/master/2018/05/03/Chapter4/4-4.png?raw=true" alt="img"></p>
+<p><img src="https://github.com/ljrprocc/ljrprocc.github.io/blob/master/images/4-4.png?raw=true" alt="img"></p>
 <p>​    对于多维度$p &gt; 1$的LDA多元高斯分布假设每个单独的预测变量都遵循一维正态分布。每对预测变量之间存在某种相关性。为了表明p-维的随机变量$X$服从$p$维高斯分布，即$X ~ N(\mu,  \Sigma)$，这里$E(X) = \mu$，并且$Cov(X) = \Sigma$，$\Sigma$是$p \times p$的协方差矩阵。那么其多为的高斯分布函数可以表示为：</p>
 <p><script type="math/tex">f(x) = \frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}exp(-\frac {1}{2}(x - \mu)^T\Sigma^{-1}(x - \mu))</script>        (4.10)</p>
 <p>​    那么对于$p &gt; 1$个预测子的情况，LDA假设第$k$类结果符合多维的高斯分布$N(\mu_k, \Sigma)$。注意在所有$K$类中其协方差矩阵均相同！那么贝叶斯分类器的分配问题也就等价于：</p>
@@ -131,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgst3jqm00001kuayedis725" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgstc6b30002d0uapou3lh92" class="article-share-link">Share</a>
       
       
     </footer>
