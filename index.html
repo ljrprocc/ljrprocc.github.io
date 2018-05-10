@@ -120,17 +120,47 @@
 <p>​    在其中，$n_k$是第$k$类的样本总数，$n$是总的训练观测点数。LDA估计$\pi_k$为属于第$k$类的观测点数占总观测点的比例。因此可以确定$\hat \pi_k = n_k / n$。将之代入到式(4.7)中，可以得到：</p>
 <p><script type="math/tex">\hat \delta_k(x) = x \frac{\hat \mu_k}{\hat \sigma^2} - \frac{\hat \mu_k^2}{2\hat \sigma^2}+log(\hat \pi_k)</script>        (4.9)</p>
 <p>​    使得式(4.9)最大。两个一维正态分布的例子如下：</p>
-<p><img src="https://github.com/ljrprocc/ljrprocc.github.io/blob/master/images/4-4.png?raw=true" alt="img"></p>
+<p><img src="4-4.png" alt="img"></p>
 <p>​    对于多维度$p &gt; 1$的LDA多元高斯分布假设每个单独的预测变量都遵循一维正态分布。每对预测变量之间存在某种相关性。为了表明p-维的随机变量$X$服从$p$维高斯分布，即$X ~ N(\mu,  \Sigma)$，这里$E(X) = \mu$，并且$Cov(X) = \Sigma$，$\Sigma$是$p \times p$的协方差矩阵。那么其多为的高斯分布函数可以表示为：</p>
 <p><script type="math/tex">f(x) = \frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}exp(-\frac {1}{2}(x - \mu)^T\Sigma^{-1}(x - \mu))</script>        (4.10)</p>
 <p>​    那么对于$p &gt; 1$个预测子的情况，LDA假设第$k$类结果符合多维的高斯分布$N(\mu_k, \Sigma)$。注意在所有$K$类中其协方差矩阵均相同！那么贝叶斯分类器的分配问题也就等价于：</p>
 <p><script type="math/tex">\delta_k(x) = x^T\Sigma^{-1}\mu_k - \frac{1}{2}\mu_k^T\Sigma^{-1}\mu_k+ log(\pi_k)</script>        (4.11)</p>
-<p>   此时，我们仍然需要估计所有期望与方差相关的参数。</p>
+<p>   此时，我们仍然需要估计所有期望与方差相关的参数$\mu_1, \mu_2, …, \mu_K, \pi_1, \pi_2, …, \pi_K, \Sigma$。注意式(4.11)中$\delta_k(x)$是$x$的线性函数。</p>
+<p><img src="4-6.png" alt="img"></p>
+<p>​    如图4.6所示，该例是一个有三类的分类问题，预测子个数$p = 2$，其中左图的贝叶斯决策边界为三条虚线，三个椭圆为包括95%点的边界线；右图为每一类产生20个观测点，LDA决策边界为三条实线。可以看到在本例中LDA呈现出了更好的预测效果。虽然其train error很低，但是仍然存在两个问题：</p>
+<ul>
+<li><p>首先，在实际情况中，train error rates通常比test error rates低，且$p$相对于$n$越高，越容易导致overfit.</p>
+</li>
+<li><p>其次，一般的无效分类器将获得仅比LDA训练集错误率稍高的错误率。另外，LDA在辨别default的问题上具有较低的灵敏度。其原因是，LDA仅仅是尝试接近贝叶斯分类器，而贝叶斯分类器则具有最低的总的error rate，也就是说贝叶斯分类器会产生最小的分错类的点。</p>
+</li>
+</ul>
+<p>​     ROC线是一种比较有效的展示两种误差的曲线。ROC是Reciver operating characteristics的缩写。在其中，true positive rate表示为sensitivity，也就是在给定阈值的情况下默认值被正确分类的比例；而false positive rate 是1-specificity，也就是非默认的值被错误地分类为默认值的比例。下图4-8即为ROC线：</p>
+<p><img src="4-8.png" alt="img"></p>
+<h3 id="平方判别分析（QDA）"><a href="#平方判别分析（QDA）" class="headerlink" title="平方判别分析（QDA）"></a>平方判别分析（QDA）</h3><p>​    类似LDA，QDA分类器假设从每一类高斯分布的样本中观测。然而在QDA中的协方差矩阵不同。那么，根据假设，贝叶斯分类器分配给$X = x$观测点为第$k$类则是要使：</p>
+<p><script type="math/tex">\begin{equation}\begin{split}\delta_k(x) &= -\frac{1}{2}(x - \mu_k)^T\Sigma_k^{-1}(x - \mu_k) + log\pi_k \\\\ &= -\frac{1}{2}x^T\Sigma_k^{-1}x + x^T\Sigma_k^{-1} - \frac{1}{2}\mu_k^T\Sigma_k^T\mu_k + log\pi_k\end{split}\end{equation}</script>    (4.12)</p>
+<p>最大。与式(4.11)不同的是，这个对$x$是二次的。</p>
+<p>   值得注意的是，LDA和QDA最大的区别是所有类别的协方差矩阵是否相等。这个原因是bias-variance trade-off。当存在$p$个预测子时，LDA的协方差矩阵总共有$p(p + 1) / 2$个不同变量，而QDA的协方差矩阵则有$Kp(p + 1) / 2$个变量。当假设$K$类具有相同的协方差矩阵时，LDA又变成了$x$的线性函数，也就是说只需要预测$Kp$个变量。因此，总体来说，LDA并不比QDA更灵活，因此其具有low-variance的特性。然而有个trade-off的点是，LDA容易遭受高的bias。粗略地说，LDA在相对更少的训练样本的情况下会表现得更好，而QDA则适合大样本的训练。</p>
+<h3 id="不同分类方法的判别与分析"><a href="#不同分类方法的判别与分析" class="headerlink" title="不同分类方法的判别与分析"></a>不同分类方法的判别与分析</h3><p>​    因为logistic回归和LDA仅仅在拟合方法的不同。对LDA而言：</p>
+<p><script type="math/tex">log(\frac{p_1(x)}{1 - p_1(x)}) = log(\frac{p_1(x)}{p_2(x)}) = c_0+c_1x​</script>        （4.13）</p>
+<p>​    其中$c_0$和$c_1$是$\mu_1$，$\mu_2$和$\sigma^2$的函数。是从正态分布这里推导出来的。对Logistic回归而言，其表达式为式(4.14)：</p>
+<p><script type="math/tex">log(\frac{p_1}{1 - p_1}) = \beta_0 + \beta_1x</script>                (4.14)</p>
+<p>​    二者都产生线性回归边界。式(4.14)中的$\beta_0$和$\beta_1$是通过最大似然估计出来的，而KNN是对一个特定的观测点$X = x$而言，取得$K$个最靠近$x$的点，KNN是一种非参数的方法。而KNN并没有告诉我们哪个预测子是重要的。</p>
+<p>​    而QDA扮演的角色则是基于非参数的KNN方法和线性的LDA或logistic回归的妥协方法。QDA在处理一些问题比LDA更显灵活。</p>
+<p>​    接下来文中介绍了6中$p = 2$的基本类型。</p>
+<ul>
+<li><strong>脚本1：</strong>两类，每一类都有20个训练观测点。每一类都有不相关的随机正太变量，并且每一类的均值都不同。</li>
+<li><strong>脚本2：</strong>相关系数-0.5。</li>
+<li><strong>脚本3：</strong>从t分布中生成$X_1$和$X_2$，每一类有50个观测点。会产生更偏离均值的点。</li>
+<li><strong>脚本4：</strong>第一类的相关系数0.5，第二类相关系数-0.5</li>
+<li><strong>脚本5：</strong>每一类，都从logistic 函数中抽样，并使用$X_1^2$，$X_2^2$， $X_1 \times X_2$作为预测子。因此会有二次边界。</li>
+<li><strong>脚本6：</strong> 从非线性方程中生成。</li>
+</ul>
+<p>​    结果见图4.11和4.10显示。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjgstc6b30002d0uapou3lh92" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/Chapter4/" data-id="cjh0bu2oj0001ekuap0isjy2b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -282,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjgstc6b30001d0ua3lduke4i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-3/" data-id="cjh0bu2op0003ekua2vsdikv7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -349,7 +379,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjgstc6b30000d0uadnholo66" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/Chapter-2/" data-id="cjh0bu2oc0000ekuackky96jy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -395,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjgstc6bj0003d0uaekwuegn0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/15/hello-world/" data-id="cjh0bu2om0002ekua0a4fl356" class="article-share-link">Share</a>
       
       
     </footer>
