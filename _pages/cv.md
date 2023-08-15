@@ -28,7 +28,7 @@ Work experience/实习经历
   * Duties included: Merging pull requests
   * Supervisor: Professor Hub
   
-Skills
+Skills/技能
 ======
 * Skill 1
 * Skill 2
