@@ -9,13 +9,14 @@ redirect_from:
 
 {% include base_path %}
 
-Education
+Education/教育经历
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* B.S. in Department of Polymer Science and Technology, Zhejiang University, 2014-2018
+2014-2018 工学学士，浙江大学高分子科学与工程学系
+* Ph.D in College of Computer Science and Technology, Zhejiang University, 2018-2024 (expected)
+2018-2024（预计） 工学博士，浙江大学计算机科学与技术学院
 
-Work experience
+Work experience/实习经历
 ======
 * Summer 2015: Research Assistant
   * Github University
