@@ -18,9 +18,9 @@ Education/教育经历
 * Ph.D in College of Computer Science and Technology, Zhejiang University, 2018-2024 (expected)  
 2018-2024（预计） 工学博士，浙江大学计算机科学与技术学院  
   * 主修课程：计算机应用数学、机器学习、数据挖掘、人工智能  
-  * 掌握框架：Pytorch、Tensorflow(了解)、Keras（了解）  
+  * 掌握框架：Pytorch、Tensorflow、Keras
   * 研究方向：无数据知识蒸馏、生成式人工智能
-  * 审稿经历：被邀请担任SCI一区期刊Reliability Engineering & System Safety审稿人，担任SCI三区期刊IEEE Access审稿人
+  * 审稿经历：受邀担任SCI一区期刊Reliability Engineering & System Safety审稿人，担任SCI三区期刊IEEE Access审稿人
 
 Language Levels/语言水平
 ======
@@ -41,7 +41,7 @@ Work experience/实习经历
   * 完成检测真实场景图片中合成文字的算法开发，并整理成论文。
 
 * 2021.08-2021.12: 浙江大学-阿里巴巴前沿研究中心（AZFT）
-  * 负责地铁站台标识检测项目的调研与开发工作，监督完成一份专利
+  * 负责地铁站台标识检测项目的前期调研与后期开发工作，并参与完成相关专利项目。
 
 School Experience/校园经历
 ======
