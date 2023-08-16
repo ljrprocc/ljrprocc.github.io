@@ -17,10 +17,10 @@ Education/教育经历
 
 * Ph.D in College of Computer Science and Technology, Zhejiang University, 2018-2024 (expected)  
 2018-2024（预计） 工学博士，浙江大学计算机科学与技术学院  
-  * 主修科目：计算机应用数学、机器学习、数据挖掘、人工智能  
+  * 主修课程：计算机应用数学、机器学习、数据挖掘、人工智能  
   * 掌握框架：Pytorch、Tensorflow(了解)、Keras（了解）  
   * 研究方向：无数据知识蒸馏、生成式人工智能
-  * 审稿经历：担任SCI一区期刊Reliability Engineering & System Safety审稿人，担任SCI三区期刊IEEE Access审稿人
+  * 审稿经历：被邀请担任SCI一区期刊Reliability Engineering & System Safety审稿人，担任SCI三区期刊IEEE Access审稿人
 
 Language Levels/语言水平
 ======
