@@ -12,11 +12,14 @@ main:
   # - title: "Portfolio"
   #   url: /portfolio/
         
-  # - title: "Blog Posts"
-  #   url: /year-archive/
+  - title: "博客内容"
+    url: /year-archive/
     
   - title: "个人简历"
     url: /cv/
+
+  - title: "Personal Resume"
+    url: /cv_en/
     
   # - title: "Guide"
   #   url: /markdown/
