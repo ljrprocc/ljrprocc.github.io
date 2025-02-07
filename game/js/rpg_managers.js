@@ -77,9 +77,9 @@ DataManager.loadDatabase = function() {
 
 DataManager.loadDataFile = function(name, src) {
     var xhr = new XMLHttpRequest();
-    var url = '/Users/lijingru/github/ljrprocc.github.io/game/data/' + src;
+    var url = 'data/' + src;
     xhr.open('GET', url);
-    xhr.overrideMimeType('/Users/lijingru/github/ljrprocc.github.io/game/iapplication/json');
+    xhr.overrideMimeType('application/json');
     xhr.onload = function() {
         if (xhr.status < 400) {
             window[name] = JSON.parse(xhr.responseText);
